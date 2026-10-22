@@ -89,6 +89,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .mix-builder{margin-top:24px;padding:24px;background:var(--card);border:1px solid #52463a;border-radius:var(--r)}
 .mix-builder h3{font-size:2rem;color:var(--gold)}
 .mix-builder p{color:var(--mut);margin:8px 0 18px}
+.mix-reference{display:block;width:min(100%,420px);max-height:65svh;height:auto;margin:0 auto 20px;border:1px solid #52463a;border-radius:var(--r);object-fit:contain;cursor:zoom-in}
 .mix-builder .f2{margin-bottom:18px}
 .mix-builder .row{justify-content:flex-start;gap:16px}
 .mix-price{font:400 2rem var(--font);color:var(--gold)}
@@ -226,7 +227,9 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
  <div class="feat" role="region" aria-label="Featured menu items" tabindex="0">
   <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/hotdog-burger.jpg" alt="Overload Hotdog with Sili Con Carne, now available for 65 pesos" style="--op:50% 60%" loading="lazy"></div><div class="in"><h3>Overload Hotdog with Sili Con Carne</h3><p>Loaded hotdog topped with homestyle sili con carne and cheese.</p><div class="fbtns"><span class="price">₱65</span><button class="add" data-add="hotdog" aria-label="Add Overload Hotdog to order">+ Add</button></div></div></article>
   <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/milktea.jpg" alt="Milky Matcha Latte, 12 oz 70 pesos, 16 oz 85 pesos" style="--op:50% 70%" loading="lazy"></div><div class="in"><h3>Milky Matcha Latte</h3><p>Creamy, cold matcha latte in two sizes.</p><div class="fbtns"><button class="add" data-add="matcha12" aria-label="Add Milky Matcha Latte 12 oz">+ 12oz ₱70</button><button class="add" data-add="matcha16" aria-label="Add Milky Matcha Latte 16 oz">+ 16oz ₱85</button></div></div></article>
-  <article class="fcard"><span class="tag">ADD-ON</span><div class="fimg"><img src="assets/chilicon.jpg" alt="Angels Homestyle Sili Con Carne add-on for 12 pesos" style="--op:50% 80%" loading="lazy"></div><div class="in"><h3>Homestyle Sili Con Carne</h3><p>Make any burger spicier and richer.</p><div class="fbtns"><span class="price">₱12</span><button class="add" data-add="sili" aria-label="Add Sili Con Carne to order">+ Add</button></div></div></article>
+  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/fruit_soda.jpg" alt="Fruit Soda Green Apple, ₱55" loading="lazy"></div><div class="in"><h3>Fruit Soda</h3><p>Refreshing Green Apple fruit soda.</p><div class="fbtns"><span class="price">₱55</span><button class="add" data-add="fruit-soda" aria-label="Add Fruit Soda to order">+ Add</button></div></div></article>
+  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/crispy_fries.jpg" alt="Crispy fries: regular ₱20 or large ₱50" loading="lazy"></div><div class="in"><h3>Crispy Fries</h3><p>Choose regular or large, with your favorite flavor.</p><div class="fbtns"><button class="add" data-add="fries-regular" aria-label="Add regular Crispy Fries to order">Regular ₱20</button><button class="add" data-add="fl" aria-label="Add large Crispy Fries to order">Large ₱50</button></div></div></article>
+  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/pizza.jpg" alt="Pizza: Hawaiian ₱150, Pepperoni ₱150, or Ham and Cheese ₱140" loading="lazy"></div><div class="in"><h3>Pizza</h3><p>Choose from three delicious flavors.</p><div class="fbtns"><button class="add" data-add="pizza-hawaiian" aria-label="Add Hawaiian Pizza to order">Hawaiian ₱150</button><button class="add" data-add="pizza-pepperoni" aria-label="Add Pepperoni Pizza to order">Pepperoni ₱150</button><button class="add" data-add="pizza-ham-cheese" aria-label="Add Ham and Cheese Pizza to order">Ham &amp; Cheese ₱140</button></div></div></article>
  </div>
 </div></section>
 
@@ -284,25 +287,68 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
    <div class="in"><span class="cat">Add-ons</span><h3>Sili Con Carne Add-on</h3><p>Angels homestyle sili con carne, added to your burger.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="sili" aria-label="Add Sili Con Carne Add-on to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="fries-regular" data-n="Upgrade Fries: Regular" data-c="Add-ons" data-p="20">
+  <article class="card" data-id="fries-regular" data-n="Crispy Fries: Regular" data-c="Add-ons" data-p="20">
    <div class="pic" data-e="🍟"><img alt="Upgrade Fries: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Fries: Regular</h3><p>Upgrade your combo to regular fries.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="fries-regular" aria-label="Add Upgrade Fries: Regular to order">+ Add</button></div></div>
+   <div class="in"><span class="cat">Add-ons</span><h3>Crispy Fries: Regular</h3><p>Regular crispy fries. Choose your favorite flavor.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="fries-regular" aria-label="Add regular Crispy Fries to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="fl" data-n="Upgrade Fries: Large" data-c="Add-ons" data-p="50">
-   <div class="pic" data-e="🍟"><img alt="Upgrade Fries: Large" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Fries: Large</h3><p>Upgrade your combo to large fries.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="fl" aria-label="Add Upgrade Fries: Large to order">+ Add</button></div></div>
+  <article class="card" data-id="fl" data-n="Crispy Fries: Large" data-c="Add-ons" data-p="50">
+   <div class="pic" data-e="🍟"><img src="assets/crispy_fries.jpg" alt="Crispy Fries" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Add-ons</span><h3>Crispy Fries: Large</h3><p>Large crispy fries. Choose your favorite flavor.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="fl" aria-label="Add large Crispy Fries to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="15">
-   <div class="pic" data-e="🥤"><img alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Drinks</h3><p>Cold drink, sold separately.</p>
+
+  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="55">
+   <div class="pic" data-e="🥤"><img src="assets/lemonade.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Lemonade</h3><p>Cold drink, sold separately.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
   </article>
+  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="85">
+   <div class="pic" data-e="🥤"><img src="assets/ice_caramel.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Ice Caramel</h3><p>Cold drink, sold separately.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="70">
+   <div class="pic" data-e="🥤"><img src="assets/milky_strawberry.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Strawberry</h3><p>Cold drink, sold separately.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="55">
+   <div class="pic" data-e="🥤"><img src="assets/milky_mango.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Mango</h3><p>Cold drink, sold separately.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="55">
+   <div class="pic" data-e="🥤"><img src="assets/americano.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Americano</h3><p>Cold drink, sold separately.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="fruit-soda" data-n="Fruit Soda: Green Apple" data-c="Drinks" data-p="55">
+   <div class="pic" data-e="🥤"><img src="assets/fruit_soda.jpg" alt="Green Apple Fruit Soda" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Fruit Soda: Green Apple</h3><p>Refreshing fruit soda.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="fruit-soda" aria-label="Add Green Apple Fruit Soda to order">+ Add</button></div></div>
+  </article>
+
+
   <article class="card" data-id="hotdog" data-n="Overload Hotdog with Sili Con Carne" data-c="Special" data-p="65">
    <div class="pic" data-e="🌭"><img src="assets/hotdog-burger.jpg" alt="Overload Hotdog with Sili Con Carne" style="--op:50% 60%" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Special</span><h3>Overload Hotdog with Sili Con Carne</h3><p>Loaded hotdog with homestyle sili con carne and cheese.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="hotdog" aria-label="Add Overload Hotdog with Sili Con Carne to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="pizza-hawaiian" data-n="Hawaiian Pizza" data-c="Special" data-p="150">
+   <div class="pic" data-e="🍕"><img src="assets/pizza.jpg" alt="Hawaiian Pizza" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Special</span><h3>Hawaiian Pizza</h3><p>Hawaiian pizza with ham and pineapple.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="pizza-hawaiian" aria-label="Add Hawaiian Pizza to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="pizza-pepperoni" data-n="Pepperoni Pizza" data-c="Special" data-p="150">
+   <div class="pic" data-e="🍕"><img src="assets/pizza.jpg" alt="Pepperoni Pizza" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Special</span><h3>Pepperoni Pizza</h3><p>Classic pepperoni pizza.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="pizza-pepperoni" aria-label="Add Pepperoni Pizza to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="pizza-ham-cheese" data-n="Ham and Cheese Pizza" data-c="Special" data-p="140">
+   <div class="pic" data-e="🍕"><img src="assets/pizza.jpg" alt="Ham and Cheese Pizza" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Special</span><h3>Ham and Cheese Pizza</h3><p>Ham and cheese pizza.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="pizza-ham-cheese" aria-label="Add Ham and Cheese Pizza to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="matcha12" data-n="Milky Matcha Latte 12oz" data-c="Drinks" data-p="70">
    <div class="pic" data-e="🍵"><img src="assets/milktea.jpg" alt="Milky Matcha Latte 12oz" style="--op:50% 70%" loading="lazy" width="400" height="300"></div>
@@ -318,6 +364,7 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
  <div class="mix-builder" id="mix-builder" aria-labelledby="mix-title" hidden>
   <h3 id="mix-title">Mix &amp; Match</h3>
   <p>Choose one main and one side. Every combo is ₱99.</p>
+  <img class="mix-reference" src="assets/mix_and_match.jpg" alt="Mix and Match combo guide: choose Burger Egg, Burger Cheese, or 5-piece Siomai, plus Large Fries, Soda, or Classic Nachos. Starts at ₱99.">
   <div class="f2">
    <div><label for="mix-main">Step 1: Pick your main</label><select id="mix-main"><option value="burger-egg">Burger Egg</option><option value="burger-cheese">Burger Cheese</option><option value="siomai">5 pcs Siomai</option></select></div>
    <div><label for="mix-side">Step 2: Pick your side</label><select id="mix-side"><option value="large-fries">Large Fries</option><option value="soda-blue">Soda — Blue Lemonade</option><option value="soda-lychee">Soda — Lychee</option><option value="soda-green">Soda — Green Apple</option><option value="classic-nachos">Classic Nachos</option></select></div>
@@ -462,7 +509,7 @@ function openState(){const p=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Man
 openState();setInterval(openState,60000);
 /* photo viewer */
 const lb=$('#lb');
-document.addEventListener('click',e=>{const im=e.target.closest('.pic img[src],.fcard img');if(im){$('img',lb).src=im.src;$('img',lb).alt=im.alt;lb.showModal()}else if(e.target===lb||e.target.closest('[data-close-lb]'))lb.close()});
+document.addEventListener('click',e=>{const im=e.target.closest('.pic img[src],.fcard img,.mix-reference');if(im){$('img',lb).src=im.src;$('img',lb).alt=im.alt;lb.showModal()}else if(e.target===lb||e.target.closest('[data-close-lb]'))lb.close()});
 /* nav + reveal */
 const hd=$('header'),bu=$('.burger'),ln=$('#links');
 addEventListener('scroll',()=>hd.classList.toggle('solid',scrollY>40),{passive:true});
