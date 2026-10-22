@@ -34,7 +34,8 @@ section{padding:80px 0}
 header{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .3s}
 header.solid{background:rgba(18,14,12,.96);box-shadow:0 2px 18px rgba(0,0,0,.6)}
 nav{display:flex;align-items:center;justify-content:space-between;height:66px}
-.logo{font:400 1.7rem var(--font);text-decoration:none;letter-spacing:.03em}
+.logo{display:inline-flex;align-items:center;gap:8px;font:400 1.7rem var(--font);text-decoration:none;letter-spacing:.03em}
+.logo-mark{width:36px;height:36px;flex:0 0 auto;object-fit:cover;border-radius:50%}
 .logo b{color:var(--gold);font-weight:400}
 .links{display:flex;gap:26px;align-items:center;list-style:none;margin:0;padding:0}
 .links a{text-decoration:none;font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
@@ -76,7 +77,6 @@ nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .category-tile:hover,.category-tile:focus-visible{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 12px 28px rgba(0,0,0,.35)}
 .category-art{position:relative;width:130px;height:90px;overflow:hidden;border-radius:12px;background:radial-gradient(circle at 35% 30%,#8a321b,#30150f 72%)}
 .category-art img{width:100%;height:100%;object-fit:cover}
-.category-icon{position:absolute;right:5px;bottom:5px;width:38px;height:38px;display:grid;place-items:center;background:var(--cream);border:2px solid var(--gold);border-radius:50%;font-size:1.4rem}
 .category-view[hidden],.products-view[hidden],.mix-builder[hidden],.category-empty[hidden]{display:none}
 .products-head{display:flex;align-items:center;gap:16px;margin-bottom:24px}
 .back-categories{flex:0 0 auto;background:transparent;border:1px solid #6b5b4a;border-radius:999px;color:var(--cream);padding:10px 16px;font:500 .9rem var(--font);cursor:pointer}
@@ -166,7 +166,7 @@ h1,h2,h3,.logo,.logo b,.price,.tot,.tot b,.mix-price,.hl b{font-weight:800;lette
 h2{font-size:clamp(2rem,5vw,3.1rem)}
 .card h3{font-size:1.2rem;line-height:1.25}
 .price{font-size:1.5rem}
-.hero-art{border-radius:32px;border:3px solid var(--gold);box-shadow:0 0 0 9px rgba(246,168,35,.14),0 30px 60px rgba(0,0,0,.6);filter:none}
+.hero-art{border:0;border-radius:0;box-shadow:none;filter:drop-shadow(0 24px 30px rgba(0,0,0,.55))}
 .meta{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:18px}.meta .badge{margin:0}
 .open{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600}
 .open i{width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 4px rgba(74,222,128,.22)}
@@ -199,7 +199,7 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 <body>
 <header>
  <div class="wrap"><nav aria-label="Main">
-  <a class="logo" href="#home">ANGELS <b>HOMEMADE BURGER</b></a>
+  <a class="logo" href="#home"><img class="logo-mark" src="assets/Logo.jpg" alt="">ANGELS <b>HOMEMADE BURGER</b></a>
   <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="links"><span class="bun-top"></span><span class="lettuce"></span><span class="patty"></span><span class="cheese"></span><span class="bun-bottom"></span></button>
   <ul class="links" id="links">
    <li><a href="#home">Home</a></li>
@@ -219,15 +219,15 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
   <p>Sulit sa bawat kagat, sarap na babalik-balikan! Fresh homemade patties, burgers from just ₱40.</p>
   <div class="cta"><a class="btn red" href="#order" data-open-order>Pre-order Now</a><a class="btn ghost" href="#menu">See the Menu</a></div>
  </div>
- <img class="hero-art" src="assets/Logo.jpg" alt="Angels Homemade Burger logo featuring a burger with wings" width="1200" height="1200" fetchpriority="high">
+ <img class="hero-art" src="assets/burger_pic.png" alt="Angels Homemade Burger logo featuring a burger with wings" width="1200" height="1200" fetchpriority="high">
 </div></section>
 
 <section class="alt" id="featured"><div class="wrap">
  <h2>Now available</h2><p class="lead" style="margin-top:12px">Swipe to explore our latest additions. Tap a photo to see it full size.</p>
  <div class="feat" role="region" aria-label="Featured menu items" tabindex="0">
   <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/hotdog-burger.jpg" alt="Overload Hotdog with Sili Con Carne, now available for 65 pesos" style="--op:50% 60%" loading="lazy"></div><div class="in"><h3>Overload Hotdog with Sili Con Carne</h3><p>Loaded hotdog topped with homestyle sili con carne and cheese.</p><div class="fbtns"><span class="price">₱65</span><button class="add" data-add="hotdog" aria-label="Add Overload Hotdog to order">+ Add</button></div></div></article>
-  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/milktea.jpg" alt="Milky Matcha Latte, 12 oz 70 pesos, 16 oz 85 pesos" style="--op:50% 70%" loading="lazy"></div><div class="in"><h3>Milky Matcha Latte</h3><p>Creamy, cold matcha latte in two sizes.</p><div class="fbtns"><button class="add" data-add="matcha12" aria-label="Add Milky Matcha Latte 12 oz">+ 12oz ₱70</button><button class="add" data-add="matcha16" aria-label="Add Milky Matcha Latte 16 oz">+ 16oz ₱85</button></div></div></article>
-  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/fruit_soda.jpg" alt="Fruit Soda Green Apple, ₱55" loading="lazy"></div><div class="in"><h3>Fruit Soda</h3><p>Refreshing Green Apple fruit soda.</p><div class="fbtns"><span class="price">₱55</span><button class="add" data-add="fruit-soda" aria-label="Add Fruit Soda to order">+ Add</button></div></div></article>
+  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/milktea.jpg" alt="Milky Matcha Latte, 12 oz ₱70 and 16 oz ₱80" style="--op:50% 70%" loading="lazy"></div><div class="in"><h3>Milky Matcha Latte</h3><p>Creamy, cold matcha latte in two sizes.</p><div class="fbtns"><button class="add" data-add="matcha-12" aria-label="Add 12 oz Milky Matcha Latte">12 oz · ₱70</button><button class="add" data-add="matcha-16" aria-label="Add 16 oz Milky Matcha Latte">16 oz · ₱80</button></div></div></article>
+  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/fruit_soda.jpg" alt="Green Apple Fruit Soda, ₱55" loading="lazy"></div><div class="in"><h3>Fruit Soda: Green Apple</h3><p>Refreshing green apple fruit soda.</p><div class="fbtns"><span class="price">₱55</span><button class="add" data-add="fruit-soda-green-apple" aria-label="Add Green Apple Fruit Soda to order">+ Add</button></div></div></article>
   <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/crispy_fries.jpg" alt="Crispy fries: regular ₱20 or large ₱50" loading="lazy"></div><div class="in"><h3>Crispy Fries</h3><p>Choose regular or large, with your favorite flavor.</p><div class="fbtns"><button class="add" data-add="fries-regular" aria-label="Add regular Crispy Fries to order">Regular ₱20</button><button class="add" data-add="fl" aria-label="Add large Crispy Fries to order">Large ₱50</button></div></div></article>
   <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/pizza.jpg" alt="Pizza: Hawaiian ₱150, Pepperoni ₱150, or Ham and Cheese ₱140" loading="lazy"></div><div class="in"><h3>Pizza</h3><p>Choose from three delicious flavors.</p><div class="fbtns"><button class="add" data-add="pizza-hawaiian" aria-label="Add Hawaiian Pizza to order">Hawaiian ₱150</button><button class="add" data-add="pizza-pepperoni" aria-label="Add Pepperoni Pizza to order">Pepperoni ₱150</button><button class="add" data-add="pizza-ham-cheese" aria-label="Add Ham and Cheese Pizza to order">Ham &amp; Cheese ₱140</button></div></div></article>
  </div>
@@ -247,41 +247,44 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
  <div class="products-view" id="products-view" hidden>
   <div class="products-head"><button class="back-categories" id="back-categories" type="button">Menu</button><h3 id="category-title"></h3></div>
  <div class="grid" id="dishes">
+
   <article class="card" data-id="classic" data-n="Classic Burger" data-c="Burger" data-p="40">
-   <div class="pic" data-e="🍔"><img alt="Classic Burger" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="pic" data-e="🍔"><img src="assets/classic_burger.jpg" alt="Classic Burger" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Burger</span><h3>Classic Burger</h3><p>Homemade patty, bun, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="classic" aria-label="Add Classic Burger to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="egg" data-n="Burger with Egg" data-c="Burger" data-p="50">
-   <div class="pic" data-e="🍳"><img alt="Burger with Egg" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="pic" data-e="🍔"><img src="assets/egg_burger.jpg" alt="Burger with Egg" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Burger</span><h3>Burger with Egg</h3><p>Homemade patty, egg, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="egg" aria-label="Add Burger with Egg to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="cheese" data-n="Burger with Cheese" data-c="Burger" data-p="50">
-   <div class="pic" data-e="🧀"><img alt="Burger with Cheese" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="pic" data-e="🧀"><img src="assets/cheese_burger.jpg" alt="Burger with Cheese" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Burger</span><h3>Burger with Cheese</h3><p>Homemade patty, melted cheese, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="cheese" aria-label="Add Burger with Cheese to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="ec" data-n="Burger Egg + Cheese" data-c="Burger" data-p="55">
-   <div class="pic" data-e="🍔"><img alt="Burger Egg + Cheese" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="pic" data-e="🍔"><img src="assets/cheese_burger_egg.jpg" alt="Burger Egg + Cheese" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Burger</span><h3>Burger Egg + Cheese</h3><p>Homemade patty, egg, cheese, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="ec" aria-label="Add Burger Egg + Cheese to order">+ Add</button></div></div>
   </article>
+
   <article class="card" data-id="bf" data-n="Burger + Fries" data-c="Combos" data-p="65">
-   <div class="pic" data-e="🍟"><img alt="Burger + Fries" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="pic" data-e="🍟"><img src="assets/combo_burger_fries.jpg" alt="Burger + Fries" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Combos</span><h3>Burger + Fries</h3><p>Classic burger with a serving of fries.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="bf" aria-label="Add Burger + Fries to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="bef" data-n="Burger with Egg + Fries" data-c="Combos" data-p="70">
-   <div class="pic" data-e="🍟"><img alt="Burger with Egg + Fries" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="pic" data-e="🍟"><img src="assets/combo_egg_burger_fries.jpg " alt="Burger with Egg + Fries" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Combos</span><h3>Burger with Egg + Fries</h3><p>Burger with egg, plus fries.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="bef" aria-label="Add Burger with Egg + Fries to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="bfd" data-n="Burger Egg, Cheese, Fries + Drink" data-c="Combos" data-p="85">
-   <div class="pic" data-e="🥤"><img alt="Burger Egg, Cheese, Fries + Drink" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="pic" data-e="🥤"><img src="assets/combo_burger_fries_drinks.jpg" alt="Burger Egg, Cheese, Fries + Drink" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Combos</span><h3>Burger Egg, Cheese, Fries + Drink</h3><p>Our fullest meal: egg, cheese, fries and a drink.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="bfd" aria-label="Add Burger Egg, Cheese, Fries + Drink to order">+ Add</button></div></div>
   </article>
+
   <article class="card" data-id="sili" data-n="Sili Con Carne Add-on" data-c="Add-ons" data-p="12">
    <div class="pic" data-e="🌶️"><img src="assets/chilicon.jpg" alt="Sili Con Carne Add-on" style="--op:50% 80%" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Add-ons</span><h3>Sili Con Carne Add-on</h3><p>Angels homestyle sili con carne, added to your burger.</p>
@@ -298,35 +301,56 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
     <div class="row"><span class="price"></span><button class="add" data-add="fl" aria-label="Add large Crispy Fries to order">+ Add</button></div></div>
   </article>
 
-  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="55">
-   <div class="pic" data-e="🥤"><img src="assets/lemonade.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Lemonade</h3><p>Cold drink, sold separately.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
+  <article class="card" data-id="americano" data-n="Americano" data-c="Drinks" data-p="55">
+   <div class="pic" data-e="🥤"><img src="assets/americano.jpg" alt="Americano" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Americano</h3><p>A smooth coffee classic.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="americano" aria-label="Add Americano to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="85">
-   <div class="pic" data-e="🥤"><img src="assets/ice_caramel.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Ice Caramel</h3><p>Cold drink, sold separately.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
-  </article>
-  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="70">
-   <div class="pic" data-e="🥤"><img src="assets/milky_strawberry.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Milky Strawberry</h3><p>Cold drink, sold separately.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
-  </article>
-  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="55">
-   <div class="pic" data-e="🥤"><img src="assets/milky_mango.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Milky Mango</h3><p>Cold drink, sold separately.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
-  </article>
-  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="55">
-   <div class="pic" data-e="🥤"><img src="assets/americano.jpg" alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Americano</h3><p>Cold drink, sold separately.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
-  </article>
-  <article class="card" data-id="fruit-soda" data-n="Fruit Soda: Green Apple" data-c="Drinks" data-p="55">
+  <article class="card" data-id="fruit-soda-green-apple" data-n="Green Apple Fruit Soda" data-c="Drinks" data-p="55">
    <div class="pic" data-e="🥤"><img src="assets/fruit_soda.jpg" alt="Green Apple Fruit Soda" loading="lazy" width="400" height="300"></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Fruit Soda: Green Apple</h3><p>Refreshing fruit soda.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="fruit-soda" aria-label="Add Green Apple Fruit Soda to order">+ Add</button></div></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Fruit Soda: Green Apple</h3><p>Refreshing green apple fruit soda.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="fruit-soda-green-apple" aria-label="Add Green Apple Fruit Soda to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="ice-caramel" data-n="Iced Caramel" data-c="Drinks" data-p="85">
+   <div class="pic" data-e="🥤"><img src="assets/ice_caramel.jpg" alt="Iced Caramel" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Iced Caramel</h3><p>Chilled caramel coffee drink.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="ice-caramel" aria-label="Add Iced Caramel to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="iced-latte" data-n="Iced Latte" data-c="Drinks" data-p="80">
+   <div class="pic" data-e="🥤"><img src="assets/iced_latte.jpg" alt="Iced Latte" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Iced Latte</h3><p>Chilled espresso and milk.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="iced-latte" aria-label="Add Iced Latte to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="lemonade" data-n="Lemonade" data-c="Drinks" data-p="55">
+   <div class="pic" data-e="🥤"><img src="assets/lemonade.jpg" alt="Lemonade" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Lemonade</h3><p>Refreshing lemonade.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="lemonade" aria-label="Add Lemonade to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="soda-lychee" data-n="Lychee Soda" data-c="Drinks" data-p="55">
+   <div class="pic" data-e="🥤"><img src="assets/soda_lychee.jpg" alt="Lychee Soda" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Soda: Lychee</h3><p>Refreshing lychee soda.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="soda-lychee" aria-label="Add Lychee Soda to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="milky-chocolate" data-n="Milky Chocolate" data-c="Drinks">
+   <div class="pic" data-e="🥤"><img src="assets/milky_chocolate.jpg" alt="Milky Chocolate" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Chocolate</h3><p>Creamy milky chocolate drink. Choose a size:</p>
+    <div class="fbtns"><button class="add" data-add="milky-chocolate-12" data-order-name="Milky Chocolate 12 oz" data-price="70" aria-label="Add 12 oz Milky Chocolate to order">12 oz · ₱70</button><button class="add" data-add="milky-chocolate-16" data-order-name="Milky Chocolate 16 oz" data-price="80" aria-label="Add 16 oz Milky Chocolate to order">16 oz · ₱80</button></div></div>
+  </article>
+  <article class="card" data-id="milky-mango" data-n="Milky Mango" data-c="Drinks">
+   <div class="pic" data-e="🥤"><img src="assets/milky_mango.jpg" alt="Milky Mango" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Mango</h3><p>Creamy milky mango drink. Choose a size:</p>
+    <div class="fbtns"><button class="add" data-add="milky-mango-12" data-order-name="Milky Mango 12 oz" data-price="70" aria-label="Add 12 oz Milky Mango to order">12 oz · ₱70</button><button class="add" data-add="milky-mango-16" data-order-name="Milky Mango 16 oz" data-price="80" aria-label="Add 16 oz Milky Mango to order">16 oz · ₱80</button></div></div>
+  </article>
+  <article class="card" data-id="milky-strawberry" data-n="Milky Strawberry" data-c="Drinks">
+   <div class="pic" data-e="🥤"><img src="assets/milky_strawberry.jpg" alt="Milky Strawberry" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Strawberry</h3><p>Creamy milky strawberry drink. Choose a size:</p>
+    <div class="fbtns"><button class="add" data-add="milky-strawberry-12" data-order-name="Milky Strawberry 12 oz" data-price="70" aria-label="Add 12 oz Milky Strawberry to order">12 oz · ₱70</button><button class="add" data-add="milky-strawberry-16" data-order-name="Milky Strawberry 16 oz" data-price="80" aria-label="Add 16 oz Milky Strawberry to order">16 oz · ₱80</button></div></div>
+  </article>
+  <article class="card" data-id="matcha" data-n="Milky Matcha Latte" data-c="Drinks">
+   <div class="pic" data-e="🍵"><img src="assets/milktea.jpg" alt="Milky Matcha Latte" style="--op:50% 70%" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Matcha Latte</h3><p>Creamy, cold matcha latte. Choose a size:</p>
+    <div class="fbtns"><button class="add" data-add="matcha-12" data-order-name="Milky Matcha Latte 12 oz" data-price="70" aria-label="Add 12 oz Milky Matcha Latte to order">12 oz · ₱70</button>
+      <button class="add" data-add="matcha-16" data-order-name="Milky Matcha Latte 16 oz" data-price="80" aria-label="Add 16 oz Milky Matcha Latte to order">16 oz · ₱80</button></div></div>
   </article>
 
 
@@ -349,16 +373,6 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
    <div class="pic" data-e="🍕"><img src="assets/pizza.jpg" alt="Ham and Cheese Pizza" loading="lazy" width="400" height="300"></div>
    <div class="in"><span class="cat">Special</span><h3>Ham and Cheese Pizza</h3><p>Ham and cheese pizza.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="pizza-ham-cheese" aria-label="Add Ham and Cheese Pizza to order">+ Add</button></div></div>
-  </article>
-  <article class="card" data-id="matcha12" data-n="Milky Matcha Latte 12oz" data-c="Drinks" data-p="70">
-   <div class="pic" data-e="🍵"><img src="assets/milktea.jpg" alt="Milky Matcha Latte 12oz" style="--op:50% 70%" loading="lazy" width="400" height="300"></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Milky Matcha Latte 12oz</h3><p>Creamy, cold matcha latte.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="matcha12" aria-label="Add Milky Matcha Latte 12oz to order">+ Add</button></div></div>
-  </article>
-  <article class="card" data-id="matcha16" data-n="Milky Matcha Latte 16oz" data-c="Drinks" data-p="85">
-   <div class="pic" data-e="🍵"><img src="assets/milktea.jpg" alt="Milky Matcha Latte 16oz" style="--op:50% 70%" loading="lazy" width="400" height="300"></div>
-   <div class="in"><span class="cat">Drinks</span><h3>Milky Matcha Latte 16oz</h3><p>The bigger cup of our milky matcha latte.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="matcha16" aria-label="Add Milky Matcha Latte 16oz to order">+ Add</button></div></div>
   </article>
  </div>
  <div class="mix-builder" id="mix-builder" aria-labelledby="mix-title" hidden>
@@ -407,10 +421,10 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 
 <footer><div class="wrap">
  <div class="fg">
-  <div><a class="logo" href="#home">ANGELS <b>HOMEMADE BURGER</b></a><p>Homemade goodness in every bite! Sulit sa bawat kagat, sarap na babalik-balikan!</p></div>
+  <div><a class="logo" href="#home"><img class="logo-mark" src="assets/Logo.jpg" alt="">ANGELS <b>HOMEMADE BURGER</b></a><p>Homemade goodness in every bite! Sulit sa bawat kagat, sarap na babalik-balikan!</p></div>
   <div><p><a href="tel:+639512862056">0951 286 2056</a></p><p>P2 Bone South, Aritao, Nueva Vizcaya</p><p>Thank you! God bless!</p><p id="fbl"></p></div>
  </div>
- <div class="copy">© 2026 Angels Homemade Burger. All rights reserved.</div>
+ <div class="copy">© 2026 Angels Homemade Burger. | All rights reserved.</div>
 </div></footer>
 <button class="btn red fab" id="fab" type="button" data-open-order>View order · <span id="fc">0</span></button>
 <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-title">
@@ -437,21 +451,25 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 
 <script>
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const items=$$('.card').map(el=>({id:el.dataset.id,n:el.dataset.n,c:el.dataset.c,p:+el.dataset.p}));
+const items=$$('.card').flatMap(el=>{
+ const sizes=$$('[data-add][data-order-name][data-price]',el);
+ return sizes.length?sizes.map(button=>({id:button.dataset.add,n:button.dataset.orderName,c:el.dataset.c,p:+button.dataset.price})):[{id:el.dataset.id,n:el.dataset.n,c:el.dataset.c,p:+el.dataset.p}];
+});
 const peso=v=>'₱'+v;
 const DELIVERY_FEE=50;
 const ORDER_PHONE='+639512862056'; /* number that receives text orders */
-$$('.card').forEach(el=>$('.price',el).textContent=peso(+el.dataset.p));
+$$('.card').forEach(el=>{const price=$('.price',el);if(price)price.textContent=peso(+el.dataset.p)});
 const grid=$('#dishes'),categoryView=$('#category-view'),productsView=$('#products-view'),mixBuilder=$('#mix-builder');
+/* Stock photos: Unsplash; drink photo by ROMAN ODINTSOV via Pexels. */
 const categories=[
- {name:'Burger',slug:'burger',icon:'🍔',image:'assets/Logo.jpg'},
- {name:'Drinks',slug:'drinks',icon:'🥤',image:'assets/milktea.jpg',pos:'50% 70%'},
- {name:'Combos',slug:'combos',icon:'🍟',image:'assets/Logo.jpg'},
- {name:'Special',slug:'special',icon:'⭐',image:'assets/hotdog-burger.jpg',pos:'50% 60%'},
- {name:'Mix and Match',slug:'mix-and-match',icon:'🍔🥤',image:'assets/Logo.jpg'},
- {name:'Add-ons',slug:'add-ons',icon:'➕',image:'assets/chilicon.jpg',pos:'50% 80%'}
+ {name:'Burger',slug:'burger',image:'assets/category-burgers.jpg'},
+ {name:'Drinks',slug:'drinks',image:'assets/category-drinks.jpg'},
+ {name:'Combos',slug:'combos',image:'assets/category-combos.jpg'},
+ {name:'Special',slug:'special',image:'assets/category-special.jpg'},
+ {name:'Mix and Match',slug:'mix-and-match',image:'assets/category-mix-match.jpg'},
+ {name:'Add-ons',slug:'add-ons',image:'assets/category-add-ons.jpg'}
 ];
-categories.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='category-tile';b.dataset.category=c.name;b.setAttribute('aria-label',`View ${c.name} menu`);b.innerHTML=`<span class="category-art" aria-hidden="true"><img src="${c.image}" alt="" style="object-position:${c.pos||'center'}"><span class="category-icon">${c.icon}</span></span><span>${c.name}</span>`;b.onclick=()=>{history.pushState(null,'',`#menu/${c.slug}`);showCategory(c);$('#menu').scrollIntoView()};categoryView.append(b)});
+categories.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='category-tile';b.dataset.category=c.name;b.setAttribute('aria-label',`View ${c.name} menu`);b.innerHTML=`<span class="category-art" aria-hidden="true"><img src="${c.image}" alt="" style="object-position:${c.pos||'center'}"></span><span>${c.name}</span>`;b.onclick=()=>{history.pushState(null,'',`#menu/${c.slug}`);showCategory(c);$('#menu').scrollIntoView()};categoryView.append(b)});
 function showCategory(category){
  categoryView.hidden=true;productsView.hidden=false;$('#category-title').textContent=category.name;
  let count=0;
