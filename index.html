@@ -47,7 +47,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .hero h1 span{display:block;color:var(--gold)}
 .hero p{font-size:1.15rem;max-width:40ch;margin:20px 0 28px;color:#eadcc3}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
-.hero-art{width:100%;max-width:460px;justify-self:center;animation:bob 5s ease-in-out infinite;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+.hero-art{width:100%;max-width:460px;aspect-ratio:1;object-fit:contain;justify-self:center;animation:bob 5s ease-in-out infinite;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
 @keyframes bob{50%{transform:translateY(-12px)}}
 .badge{display:inline-block;border:1.5px solid var(--gold);color:var(--gold);border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:700;margin-bottom:18px}
 @media(max-width:780px){.hero .wrap{grid-template-columns:1fr}.hero-art{max-width:320px;order:-1}}
@@ -61,6 +61,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(0,0,0,.5)}
 .card.hide{display:none}.card.pop{animation:pop .4s both}
 @keyframes pop{from{opacity:0;transform:scale(.95)}}
+.pic{position:relative;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#7a2312,#140e0b)}.pic::before{content:attr(data-e);font-size:4.5rem}.pic img{position:absolute;inset:0}.pic img:not([src]){display:none}
 .pic{aspect-ratio:4/3;overflow:hidden}
 .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .card:hover img{transform:scale(1.07)}
@@ -136,13 +137,77 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   <p>Sulit sa bawat kagat, sarap na babalik-balikan! Fresh homemade patties, burgers from just ₱40.</p>
   <div class="cta"><a class="btn red" href="#order">Pre-order Now</a><a class="btn ghost" href="#menu">See the Menu</a></div>
  </div>
- <svg class="hero-art" id="hero-art" viewBox="0 0 400 300" role="img" aria-label="Illustration of a burger with an egg and a halo"></svg>
+ <img class="hero-art" src="assets/Logo.jpg" alt="Angels Homemade Burger logo featuring a burger with wings" width="1200" height="1200" fetchpriority="high">
 </div></section>
 
 <section id="menu"><div class="wrap">
  <div class="head"><div><h2>The Menu</h2><p class="lead">Tap “Add” to build your pre-order.</p></div>
   <div class="filters" role="group" aria-label="Filter menu"></div></div>
- <div class="grid" id="dishes"></div>
+ <!--
+ HOW TO EDIT THE MENU (no coding needed)
+ - Photo: inside a card, find <img alt="..."> and add src="your-photo.jpg" -> <img src="your-photo.jpg" alt="...">
+ - Price: change the number in data-p="40" on the <article> line.
+ - Name / description / category: edit data-n, data-c and the text inside the card.
+ - New item: copy a whole <article> ... </article> block, paste it below the last one, and change data-id to a new unique word.
+ - New category: use a new name in data-c and the cat label; a filter button appears automatically.
+-->
+ <div class="grid" id="dishes">
+  <article class="card" data-id="classic" data-n="Classic Burger" data-c="Burgers" data-p="40">
+   <div class="pic" data-e="🍔"><img alt="Classic Burger" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Burgers</span><h3>Classic Burger</h3><p>Homemade patty, bun, sauce and toppings.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="classic" aria-label="Add Classic Burger to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="egg" data-n="Burger with Egg" data-c="Burgers" data-p="50">
+   <div class="pic" data-e="🍳"><img alt="Burger with Egg" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Burgers</span><h3>Burger with Egg</h3><p>Homemade patty, egg, sauce and toppings.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="egg" aria-label="Add Burger with Egg to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="cheese" data-n="Burger with Cheese" data-c="Burgers" data-p="50">
+   <div class="pic" data-e="🧀"><img alt="Burger with Cheese" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Burgers</span><h3>Burger with Cheese</h3><p>Homemade patty, melted cheese, sauce and toppings.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="cheese" aria-label="Add Burger with Cheese to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="ec" data-n="Burger Egg + Cheese" data-c="Burgers" data-p="55">
+   <div class="pic" data-e="🍔"><img alt="Burger Egg + Cheese" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Burgers</span><h3>Burger Egg + Cheese</h3><p>Homemade patty, egg, cheese, sauce and toppings.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="ec" aria-label="Add Burger Egg + Cheese to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="bf" data-n="Burger + Fries" data-c="Combos" data-p="65">
+   <div class="pic" data-e="🍟"><img alt="Burger + Fries" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Combos</span><h3>Burger + Fries</h3><p>Classic burger with a serving of fries.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="bf" aria-label="Add Burger + Fries to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="bef" data-n="Burger with Egg + Fries" data-c="Combos" data-p="70">
+   <div class="pic" data-e="🍟"><img alt="Burger with Egg + Fries" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Combos</span><h3>Burger with Egg + Fries</h3><p>Burger with egg, plus fries.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="bef" aria-label="Add Burger with Egg + Fries to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="bfd" data-n="Burger Egg, Cheese, Fries + Drink" data-c="Combos" data-p="85">
+   <div class="pic" data-e="🥤"><img alt="Burger Egg, Cheese, Fries + Drink" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Combos</span><h3>Burger Egg, Cheese, Fries + Drink</h3><p>Our fullest meal: egg, cheese, fries and a drink.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="bfd" aria-label="Add Burger Egg, Cheese, Fries + Drink to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="fr" data-n="Upgrade Burger: Regular" data-c="Add-ons" data-p="12">
+   <div class="pic" data-e="🍟"><img src="assets/chilicon.jpg" alt="Upgrade Burger: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Burger: Regular</h3><p>Upgrade your combo to chili Con Carne.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="fr" aria-label="Add Upgrade Fries: Regular to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="fr" data-n="Upgrade Fries: Regular" data-c="Add-ons" data-p="20">
+   <div class="pic" data-e="🍟"><img alt="Upgrade Fries: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Fries: Regular</h3><p>Upgrade your combo to regular fries.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="fr" aria-label="Add Upgrade Fries: Regular to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="fl" data-n="Upgrade Fries: Large" data-c="Add-ons" data-p="50">
+   <div class="pic" data-e="🍟"><img alt="Upgrade Fries: Large" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Fries: Large</h3><p>Upgrade your combo to large fries.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="fl" aria-label="Add Upgrade Fries: Large to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="dr" data-n="Drinks" data-c="Add-ons" data-p="15">
+   <div class="pic" data-e="🥤"><img alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
+   <div class="in"><span class="cat">Add-ons</span><h3>Drinks</h3><p>Cold drink, sold separately.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
+  </article>
+ </div>
 </div></section>
 
 <section class="alt" id="order"><div class="wrap two">
@@ -183,9 +248,9 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   <ul class="info">
    <li><b>Address</b>P2 Bone South, Aritao, Nueva Vizcaya 3704, Philippines</li>
    <li><b>Hours</b>9:00 AM - 9:00 PM</li>
-   <li><b>Email</b><a href="mailto:noelvibasdizonjr@gmail.com">noelvibasdizonjr@gmail.com</a></li>
-   <li><b>Phone</b><a href="tel:+639512862056">0951 286 2056</a></li>
-   <li><b>Facebook</b>Angels Homemade Burger (message us on Messenger)</li>
+   <li><b>Email Us</b><a href="mailto:noelvibasdizonjr@gmail.com">noelvibasdizonjr@gmail.com</a></li>
+   <li><b>Call Us</b><a href="tel:+639512862056">0951 286 2056</a></li>
+   <li><b>Facebook</b><a href="https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr" target="_blank" rel="noopener">Angel's Homemade Burger</a></li>
   </ul>
   <div class="cta"><a class="btn red" href="https://maps.app.goo.gl/hP7mNs8oBj9kKCU67?g_st=ic" target="_blank" rel="noopener">Get Directions</a><a class="btn ghost" href="tel:+639512862056">Call Now</a></div>
  </div>
@@ -196,7 +261,7 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
 <footer><div class="wrap">
  <div class="fg">
   <div><a class="logo" href="#home">ANGELS <b>HOMEMADE BURGER</b></a><p>Homemade goodness in every bite! Sulit sa bawat kagat, sarap na babalik-balikan!</p></div>
-  <div><p><a href="tel:+639512862056">0951 286 2056</a></p><p>P2 Bone South, Aritao, Nueva Vizcaya</p><p>Thank you! God bless!</p></div>
+  <div><p><a href="tel:+639512862056">0951 286 2056</a></p><p>P2 Bone South, Aritao, Nueva Vizcaya</p><p>Thank you! God bless!</p><p id="fbl"></p></div>
  </div>
  <div class="copy">© 2026 Angels Homemade Burger. All rights reserved.</div>
 </div></footer>
@@ -205,30 +270,11 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
 
 <script>
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-/* Illustrated placeholders: swap each src for a real photo of the burger */
-function art(o){
- const b=`<defs><radialGradient id="b" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#7a2312"/><stop offset="1" stop-color="#140e0b"/></radialGradient></defs>`;
- const burger=(x,y)=>`<g transform="translate(${x} ${y})"><path d="M-80 -4q80-84 160 0z" fill="#d9903c"/><g fill="#fbf1de"><circle cx="-30" cy="-44" r="3"/><circle cx="8" cy="-52" r="3"/><circle cx="38" cy="-38" r="3"/></g><rect x="-84" y="-6" width="168" height="14" rx="7" fill="#78b043"/>${o.cheese?'<path d="M-86 8h172l-14 14h-24l-14 16-14-16h-106z" fill="#f6b81a"/>':''}<rect x="-80" y="${o.cheese?22:10}" width="160" height="24" rx="11" fill="#43190e"/>${o.egg?'<ellipse cx="0" cy="'+(o.cheese?20:8)+'" rx="76" ry="14" fill="#fff6e8"/><circle cx="-6" cy="'+(o.cheese?18:6)+'" r="12" fill="#f4a712"/>':''}<path d="M-80 46q80 28 160 0v10q-80 26-160 0z" fill="#c98a3a"/></g>`;
- const fries=o.fries?`<g transform="translate(300 170)" fill="#f2c14e"><path d="M-30 20l-6-90h14l4 90zM-14 20l-2-100h14l2 100zM2 20l4-96h14l-2 96zM18 20l10-84h14l-12 84z"/><path d="M-40 14h90l-10 70h-70z" fill="#c62828"/></g>`:'';
- const drink=o.drink?`<g transform="translate(70 160)"><path d="M-26 -50h52l-8 100h-36z" fill="#3a1d12"/><rect x="-30" y="-58" width="60" height="10" rx="4" fill="#eee"/></g>`:'';
- return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#b)"/>${b}${o.only?'':''}${o.t=='fries'?`<g transform="translate(200 150) scale(1.5)" fill="#f2c14e"><path d="M-40 20l-8-100h14l6 100zM-18 20l-2-112h14l2 112zM6 20l4-106h14l-2 106zM28 20l12-92h14l-14 92z"/><path d="M-56 14h110l-12 76h-86z" fill="#c62828"/></g>`:o.t=='drink'?`<g transform="translate(200 150) scale(1.6)"><path d="M-30 -60h60l-10 118h-40z" fill="#3a1d12"/><rect x="-34" y="-68" width="68" height="12" rx="5" fill="#eee"/><rect x="6" y="-110" width="6" height="46" fill="#d62828"/></g>`:burger(o.fries||o.drink?170:200,150)+fries+drink}</svg>`}
-const U=o=>'data:image/svg+xml;utf8,'+encodeURIComponent(art(o));
-const items=[
-{id:'classic',n:'Classic Burger',c:'Burgers',p:40,d:'Homemade patty, bun, sauce and toppings.',o:{}},
-{id:'egg',n:'Burger with Egg',c:'Burgers',p:50,d:'Homemade patty, egg, sauce and toppings.',o:{egg:1}},
-{id:'cheese',n:'Burger with Cheese',c:'Burgers',p:50,d:'Homemade patty, melted cheese, sauce and toppings.',o:{cheese:1}},
-{id:'ec',n:'Burger Egg + Cheese',c:'Burgers',p:55,d:'Homemade patty, egg, cheese, sauce and toppings.',o:{egg:1,cheese:1}},
-{id:'bf',n:'Burger + Fries',c:'Combos',p:65,d:'Classic burger with a serving of fries.',o:{fries:1}},
-{id:'bef',n:'Burger with Egg + Fries',c:'Combos',p:70,d:'Burger with egg, plus fries.',o:{egg:1,fries:1}},
-{id:'bfd',n:'Burger Egg, Cheese, Fries + Drink',c:'Combos',p:85,d:'Our fullest meal: egg, cheese, fries and a drink.',o:{egg:1,cheese:1,fries:1,drink:1}},
-{id:'fr',n:'Upgrade Fries: Regular',c:'Add-ons',p:20,d:'Upgrade your combo to regular fries.',o:{t:'fries'}},
-{id:'fl',n:'Upgrade Fries: Large',c:'Add-ons',p:50,d:'Upgrade your combo to large fries.',o:{t:'fries'}},
-{id:'dr',n:'Drinks',c:'Add-ons',p:15,d:'Cold drink, sold separately.',o:{t:'drink'}}];
-$('#hero-art').innerHTML=U({egg:1,cheese:1}).split(',').slice(1).join(',').length?decodeURIComponent(U({egg:1,cheese:1}).split(',').slice(1).join(',')).replace(/^<svg[^>]*>|<\/svg>$/g,'')+'<ellipse cx="200" cy="40" rx="70" ry="12" fill="none" stroke="#f6a823" stroke-width="6"/>':'';
+const items=$$('.card').map(el=>({id:el.dataset.id,n:el.dataset.n,c:el.dataset.c,p:+el.dataset.p}));
 const peso=v=>'₱'+v;
-$('#dishes').innerHTML=items.map(i=>`<article class="card" data-c="${i.c}"><div class="pic"><img src="${U(i.o)}" alt="${i.n} (illustrated placeholder)" loading="lazy" width="400" height="300"></div><div class="in"><span class="cat">${i.c}</span><h3>${i.n}</h3><p>${i.d}</p><div class="row"><span class="price">${peso(i.p)}</span><button class="add" data-add="${i.id}" aria-label="Add ${i.n} to order">+ Add</button></div></div></article>`).join('');
+$$('.card').forEach(el=>$('.price',el).textContent=peso(+el.dataset.p));
 const fb=$('.filters'),grid=$('#dishes');
-['All','Burgers','Combos','Add-ons'].forEach((c,k)=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',k==0);b.onclick=()=>{$$('.chip',fb).forEach(x=>x.setAttribute('aria-pressed',x==b));$$('.card',grid).forEach(el=>{const s=c=='All'||el.dataset.c==c;el.classList.toggle('hide',!s);if(s){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}})};fb.append(b)});
+['All',...new Set(items.map(i=>i.c))].forEach((c,k)=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',k==0);b.onclick=()=>{$$('.chip',fb).forEach(x=>x.setAttribute('aria-pressed',x==b));$$('.card',grid).forEach(el=>{const s=c=='All'||el.dataset.c==c;el.classList.toggle('hide',!s);if(s){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}})};fb.append(b)});
 /* order */
 const cart={};
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),1600)};
@@ -250,6 +296,9 @@ function msg(){
  return `Hello Angels Homemade Burger! Pre-order:\n${rows.map(i=>`${cart[i.id]}x ${i.n} (${peso(i.p*cart[i.id])})`).join('\n')}\nTotal: ${peso(tot)}\nName: ${$('#nm').value.trim()}\nPickup: ${$('#pk').value.trim()}${$('#nt').value.trim()?'\nNotes: '+$('#nt').value.trim():''}`}
 $('#of').onsubmit=e=>{e.preventDefault();const m=msg();if(m)location.href='sms:+639512862056?body='+encodeURIComponent(m)};
 $('#cp').onclick=async()=>{const m=msg();if(!m)return;try{await navigator.clipboard.writeText(m);toast('Order copied. Paste it in Messenger.')}catch{toast('Copy failed. Use Text My Order.')}};
+/* SETTINGS: paste your Facebook page link between the quotes, e.g. 'https://facebook.com/yourpage' */
+const FB_URL='';
+if(FB_URL)$('#fbl').innerHTML='<a class="btn ghost" href="'+FB_URL+'" target="_blank" rel="noopener">Follow us on Facebook</a>';
 render();
 /* nav + reveal */
 const hd=$('header'),bu=$('.burger'),ln=$('#links');
