@@ -65,7 +65,13 @@ nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
 .card{background:var(--card);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
 .card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(0,0,0,.5)}
-.card.hide{display:none}.card.pop{animation:pop .4s both}
+.card.hide,.mix-builder.hide{display:none}.card.pop{animation:pop .4s both}
+.mix-builder{margin-top:24px;padding:24px;background:var(--card);border:1px solid #52463a;border-radius:var(--r)}
+.mix-builder h3{font-size:2rem;color:var(--gold)}
+.mix-builder p{color:var(--mut);margin:8px 0 18px}
+.mix-builder .f2{margin-bottom:18px}
+.mix-builder .row{justify-content:flex-start;gap:16px}
+.mix-price{font:400 2rem var(--disp);color:var(--gold)}
 @keyframes pop{from{opacity:0;transform:scale(.95)}}
 .pic{position:relative;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#7a2312,#140e0b)}.pic::before{content:attr(data-e);font-size:4.5rem}.pic img{position:absolute;inset:0}.pic img:not([src]){display:none}
 .pic{aspect-ratio:4/3;overflow:hidden}
@@ -105,6 +111,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:0}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:520px){.f2{grid-template-columns:1fr}}
 .note{font-size:.85rem;color:var(--mut);margin:0}
+.order-dialog{width:min(680px,calc(100% - 24px));max-width:none;max-height:calc(100svh - 24px);margin:auto;padding:24px;background:var(--bg2);color:var(--cream);border:1px solid #52463a;border-radius:var(--r);overflow:auto}
+.order-dialog::backdrop{background:rgba(0,0,0,.76);backdrop-filter:blur(4px)}
+.dialog-head{display:flex;justify-content:space-between;align-items:start;gap:16px;margin-bottom:20px}
+.dialog-head h2{font-size:2.5rem}
+.dialog-close{flex:0 0 44px;width:44px;height:44px;border:1px solid #6b5b4a;border-radius:50%;background:transparent;color:var(--cream);font-size:1.8rem;line-height:1;cursor:pointer}
+.dialog-close:hover{border-color:var(--gold);color:var(--gold)}
+.order-dialog .order{padding:0;background:transparent}
+@media(max-width:520px){.order-dialog{padding:18px}.order-dialog .cta .btn{flex:1;text-align:center;padding:12px 14px}}
 .info{display:grid;gap:16px;margin:22px 0;padding:0;list-style:none}
 .info b{display:block;color:var(--gold)}
 .info a{text-underline-offset:3px}
@@ -129,8 +143,11 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   <a class="logo" href="#home">ANGELS <b>HOMEMADE BURGER</b></a>
   <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="links"><span></span><span></span><span></span></button>
   <ul class="links" id="links">
-   <li><a href="#home">Home</a></li><li><a href="#menu">Menu</a></li><li><a href="#about">About</a></li><li><a href="#contact">Find Us</a></li>
-   <li><a class="btn" href="#order">Pre-order</a></li>
+   <li><a href="#home">Home</a></li>
+   <li><a href="#menu">Menu</a></li>
+   <li><a href="#about">About</a></li>
+   <li><a href="#contact">Find Us</a></li>
+   <li><a class="btn" href="#order" data-open-order>Pre-order</a></li>
   </ul>
  </nav></div>
 </header>
@@ -141,7 +158,7 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   <span class="badge">100% Homemade · Made fresh daily</span>
   <h1>Homemade goodness <span>in every bite.</span></h1>
   <p>Sulit sa bawat kagat, sarap na babalik-balikan! Fresh homemade patties, burgers from just ₱40.</p>
-  <div class="cta"><a class="btn red" href="#order">Pre-order Now</a><a class="btn ghost" href="#menu">See the Menu</a></div>
+  <div class="cta"><a class="btn red" href="#order" data-open-order>Pre-order Now</a><a class="btn ghost" href="#menu">See the Menu</a></div>
  </div>
  <img class="hero-art" src="assets/Logo.jpg" alt="Angels Homemade Burger logo featuring a burger with wings" width="1200" height="1200" fetchpriority="high">
 </div></section>
@@ -155,27 +172,27 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
  - Price: change the number in data-p="40" on the <article> line.
  - Name / description / category: edit data-n, data-c and the text inside the card.
  - New item: copy a whole <article> ... </article> block, paste it below the last one, and change data-id to a new unique word.
- - New category: use a new name in data-c and the cat label; a filter button appears automatically.
+ - Categories: use Burger, Drinks, Combos, Special, Mix and Match or Add-ons in data-c and the cat label.
 -->
  <div class="grid" id="dishes">
-  <article class="card" data-id="classic" data-n="Classic Burger" data-c="Burgers" data-p="40">
+  <article class="card" data-id="classic" data-n="Classic Burger" data-c="Burger" data-p="40">
    <div class="pic" data-e="🍔"><img alt="Classic Burger" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Burgers</span><h3>Classic Burger</h3><p>Homemade patty, bun, sauce and toppings.</p>
+   <div class="in"><span class="cat">Burger</span><h3>Classic Burger</h3><p>Homemade patty, bun, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="classic" aria-label="Add Classic Burger to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="egg" data-n="Burger with Egg" data-c="Burgers" data-p="50">
+  <article class="card" data-id="egg" data-n="Burger with Egg" data-c="Burger" data-p="50">
    <div class="pic" data-e="🍳"><img alt="Burger with Egg" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Burgers</span><h3>Burger with Egg</h3><p>Homemade patty, egg, sauce and toppings.</p>
+   <div class="in"><span class="cat">Burger</span><h3>Burger with Egg</h3><p>Homemade patty, egg, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="egg" aria-label="Add Burger with Egg to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="cheese" data-n="Burger with Cheese" data-c="Burgers" data-p="50">
+  <article class="card" data-id="cheese" data-n="Burger with Cheese" data-c="Burger" data-p="50">
    <div class="pic" data-e="🧀"><img alt="Burger with Cheese" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Burgers</span><h3>Burger with Cheese</h3><p>Homemade patty, melted cheese, sauce and toppings.</p>
+   <div class="in"><span class="cat">Burger</span><h3>Burger with Cheese</h3><p>Homemade patty, melted cheese, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="cheese" aria-label="Add Burger with Cheese to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="ec" data-n="Burger Egg + Cheese" data-c="Burgers" data-p="55">
+  <article class="card" data-id="ec" data-n="Burger Egg + Cheese" data-c="Burger" data-p="55">
    <div class="pic" data-e="🍔"><img alt="Burger Egg + Cheese" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Burgers</span><h3>Burger Egg + Cheese</h3><p>Homemade patty, egg, cheese, sauce and toppings.</p>
+   <div class="in"><span class="cat">Burger</span><h3>Burger Egg + Cheese</h3><p>Homemade patty, egg, cheese, sauce and toppings.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="ec" aria-label="Add Burger Egg + Cheese to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="bf" data-n="Burger + Fries" data-c="Combos" data-p="65">
@@ -196,46 +213,33 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   <article class="card" data-id="fr" data-n="Upgrade Burger: Regular" data-c="Add-ons" data-p="12">
    <div class="pic" data-e="🍟"><img src="assets/chilicon.jpg" alt="Upgrade Burger: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
    <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Burger: Regular</h3><p>Upgrade your combo to chili Con Carne.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="fr" aria-label="Add Upgrade Fries: Regular to order">+ Add</button></div></div>
+   <div class="row"><span class="price"></span><button class="add" data-add="fr" aria-label="Add Upgrade Burger: Regular to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="fr" data-n="Upgrade Fries: Regular" data-c="Add-ons" data-p="20">
+  <article class="card" data-id="fries-regular" data-n="Upgrade Fries: Regular" data-c="Add-ons" data-p="20">
    <div class="pic" data-e="🍟"><img alt="Upgrade Fries: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
    <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Fries: Regular</h3><p>Upgrade your combo to regular fries.</p>
-    <div class="row"><span class="price"></span><button class="add" data-add="fr" aria-label="Add Upgrade Fries: Regular to order">+ Add</button></div></div>
+    <div class="row"><span class="price"></span><button class="add" data-add="fries-regular" aria-label="Add Upgrade Fries: Regular to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="fl" data-n="Upgrade Fries: Large" data-c="Add-ons" data-p="50">
    <div class="pic" data-e="🍟"><img alt="Upgrade Fries: Large" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
    <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Fries: Large</h3><p>Upgrade your combo to large fries.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="fl" aria-label="Add Upgrade Fries: Large to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="dr" data-n="Drinks" data-c="Add-ons" data-p="15">
+  <article class="card" data-id="dr" data-n="Drinks" data-c="Drinks" data-p="15">
    <div class="pic" data-e="🥤"><img alt="Drinks" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Add-ons</span><h3>Drinks</h3><p>Cold drink, sold separately.</p>
+   <div class="in"><span class="cat">Drinks</span><h3>Drinks</h3><p>Cold drink, sold separately.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
   </article>
  </div>
-</div></section>
-
-<section class="alt" id="order"><div class="wrap two">
- <div class="rv">
-  <h2>Pre-order</h2>
-  <p class="lead" style="margin-top:14px">Build your order, then send it to Angels by text or copy it into Messenger. We confirm by call or message.</p>
-  <ul class="hl">
-   <li><b>Pre-orders accepted</b><span>Order ahead so your burger is ready when you arrive.</span></li>
-   <li><b>Pay on pickup</b><span>Cash on pickup. Confirm details with the shop.</span></li>
-  </ul>
- </div>
- <form class="order rv" id="of" novalidate>
-  <ul class="lines" id="lines" aria-live="polite"></ul>
-  <div class="tot"><span>Total</span><b id="tot">₱0</b></div>
+ <div class="mix-builder hide" id="mix-builder" aria-labelledby="mix-title">
+  <h3 id="mix-title">Mix &amp; Match</h3>
+  <p>Choose one main and one side. Every combo is ₱99.</p>
   <div class="f2">
-   <div><label for="nm">Your name</label><input id="nm" autocomplete="name"><div class="err"></div></div>
-   <div><label for="pk">Pickup time</label><input id="pk" placeholder="e.g. 5:30 pm today"><div class="err"></div></div>
+   <div><label for="mix-main">Step 1: Pick your main</label><select id="mix-main"><option value="burger-egg">Burger Egg</option><option value="burger-cheese">Burger Cheese</option><option value="siomai">5 pcs Siomai</option></select></div>
+   <div><label for="mix-side">Step 2: Pick your side</label><select id="mix-side"><option value="large-fries">Large Fries</option><option value="soda-blue">Soda — Blue Lemonade</option><option value="soda-lychee">Soda — Lychee</option><option value="soda-green">Soda — Green Apple</option><option value="classic-nachos">Classic Nachos</option></select></div>
   </div>
-  <div><label for="nt">Notes (optional)</label><textarea id="nt" rows="2" placeholder="No pickles, extra sauce, etc."></textarea></div>
-  <div class="cta"><button class="btn red" type="submit">Text My Order</button><button class="btn ghost" type="button" id="cp">Copy Order</button><a class="btn ghost" href="tel:+639512862056">Call</a></div>
-  <p class="note">Opens your messaging app with the order filled in. Nothing is sent until you press send.</p>
- </form>
+  <div class="row"><button class="btn red" type="button" id="add-mix">Add combo to order</button><span class="mix-price">₱99</span></div>
+ </div>
 </div></section>
 
 <section id="about"><div class="wrap two">
@@ -271,7 +275,21 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
  </div>
  <div class="copy">© 2026 Angels Homemade Burger. All rights reserved.</div>
 </div></footer>
-<a class="btn red fab" id="fab" href="#order">View order · <span id="fc">0</span></a>
+<button class="btn red fab" id="fab" type="button" data-open-order>View order · <span id="fc">0</span></button>
+<dialog class="order-dialog" id="order-dialog" aria-labelledby="order-title">
+ <div class="dialog-head"><div><h2 id="order-title">Your order</h2><p class="note">Review your items and pickup details.</p></div><button class="dialog-close" type="button" aria-label="Close order" data-close-order>&times;</button></div>
+ <form class="order" id="of" novalidate>
+  <ul class="lines" id="lines" aria-live="polite"></ul>
+  <div class="tot"><span>Total</span><b id="tot">₱0</b></div>
+  <div class="f2">
+   <div><label for="nm">Your name</label><input id="nm" autocomplete="name"><div class="err"></div></div>
+   <div><label for="pk">Pickup time</label><input id="pk" placeholder="e.g. 5:30 pm today"><div class="err"></div></div>
+  </div>
+  <div><label for="nt">Notes (optional)</label><textarea id="nt" rows="2" placeholder="No pickles, extra sauce, etc."></textarea></div>
+  <div class="cta"><button class="btn red" type="submit">Text My Order</button><button class="btn ghost" type="button" id="cp">Copy Order</button><a class="btn ghost" href="tel:+639512862056">Call</a></div>
+  <p class="note">Opens your messaging app with the order filled in. Nothing is sent until you press send.</p>
+ </form>
+</dialog>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -280,7 +298,8 @@ const items=$$('.card').map(el=>({id:el.dataset.id,n:el.dataset.n,c:el.dataset.c
 const peso=v=>'₱'+v;
 $$('.card').forEach(el=>$('.price',el).textContent=peso(+el.dataset.p));
 const fb=$('.filters'),grid=$('#dishes');
-['All',...new Set(items.map(i=>i.c))].forEach((c,k)=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',k==0);b.onclick=()=>{$$('.chip',fb).forEach(x=>x.setAttribute('aria-pressed',x==b));$$('.card',grid).forEach(el=>{const s=c=='All'||el.dataset.c==c;el.classList.toggle('hide',!s);if(s){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}})};fb.append(b)});
+const mixBuilder=$('#mix-builder');
+['All','Burger','Drinks','Combos','Special','Mix and Match','Add-ons'].forEach((c,k)=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',k==0);b.onclick=()=>{$$('.chip',fb).forEach(x=>x.setAttribute('aria-pressed',x==b));$$('.card',grid).forEach(el=>{const s=c=='All'||el.dataset.c==c;el.classList.toggle('hide',!s);if(s){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}});mixBuilder.classList.toggle('hide',c!=='All'&&c!=='Mix and Match')};fb.append(b)});
 /* order */
 const cart={};
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),1600)};
@@ -291,8 +310,11 @@ function render(){
  $('#tot').textContent=peso(tot);$('#fc').textContent=n;$('#fab').classList.toggle('show',n>0);
  return tot}
 document.addEventListener('click',e=>{
- const a=e.target.closest('[data-add]'),q=e.target.closest('[data-q]');
+ const a=e.target.closest('[data-add]'),q=e.target.closest('[data-q]'),mix=e.target.closest('#add-mix');
  if(a){cart[a.dataset.add]=(cart[a.dataset.add]||0)+1;render();toast('Added to your order')}
+ if(mix){const main=$('#mix-main'),side=$('#mix-side'),id='mix-'+main.value+'-'+side.value;
+  if(!items.some(i=>i.id===id))items.push({id,n:`Mix & Match: ${main.selectedOptions[0].textContent} + ${side.selectedOptions[0].textContent}`,c:'Mix and Match',p:99});
+  cart[id]=(cart[id]||0)+1;render();toast('Mix & Match combo added')}
  if(q){const[id,d]=q.dataset.q.split(':');cart[id]=Math.max(0,(cart[id]||0)+ +d);render()}});
 function msg(){
  const tot=render(),rows=items.filter(i=>cart[i.id]);
@@ -300,7 +322,7 @@ function msg(){
  const ok=['nm','pk'].map(id=>{const el=$('#'+id),v=!!el.value.trim();el.setAttribute('aria-invalid',!v);el.nextElementSibling.textContent=v?'':'Required.';return v});
  if(!ok.every(Boolean)){$('#'+(ok[0]?'pk':'nm')).focus();return null}
  return `Hello Angels Homemade Burger! Pre-order:\n${rows.map(i=>`${cart[i.id]}x ${i.n} (${peso(i.p*cart[i.id])})`).join('\n')}\nTotal: ${peso(tot)}\nName: ${$('#nm').value.trim()}\nPickup: ${$('#pk').value.trim()}${$('#nt').value.trim()?'\nNotes: '+$('#nt').value.trim():''}`}
-$('#of').onsubmit=e=>{e.preventDefault();const m=msg();if(m)location.href='sms:+639512862056?body='+encodeURIComponent(m)};
+$('#of').onsubmit=e=>{e.preventDefault();const m=msg();if(m)location.href='sms:+639551267925?body='+encodeURIComponent(m)};
 $('#cp').onclick=async()=>{const m=msg();if(!m)return;try{await navigator.clipboard.writeText(m);toast('Order copied. Paste it in Messenger.')}catch{toast('Copy failed. Use Text My Order.')}};
 /* SETTINGS: paste your Facebook page link between the quotes, e.g. 'https://facebook.com/yourpage' */
 const FB_URL='';
@@ -311,6 +333,11 @@ const hd=$('header'),bu=$('.burger'),ln=$('#links');
 addEventListener('scroll',()=>hd.classList.toggle('solid',scrollY>40),{passive:true});
 bu.onclick=()=>{const o=ln.classList.toggle('open');bu.setAttribute('aria-expanded',o)};
 $$('a',ln).forEach(a=>a.onclick=()=>{ln.classList.remove('open');bu.setAttribute('aria-expanded',false)});
+const od=$('#order-dialog');
+$$('[data-open-order]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();if(!od.open)od.showModal()}));
+$('[data-close-order]').onclick=()=>od.close();
+od.addEventListener('click',e=>{if(e.target===od)od.close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&od.open)od.close()});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
 $$('.rv').forEach(el=>io.observe(el));
 </script>
