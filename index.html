@@ -5,9 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Angels Homemade Burger | Aritao, Nueva Vizcaya</title>
 <meta name="description" content="Angels Homemade Burger in Aritao, Nueva Vizcaya. Fresh homemade patties from ₱40. Pre-order by call or text: 0951 286 2056.">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#120e0c">
+<meta property="og:title" content="Angels Homemade Burger | Aritao, Nueva Vizcaya">
+<meta property="og:description" content="Fresh homemade burgers from ₱40. Pre-order by text or call: 0951 286 2056.">
+<meta property="og:type" content="restaurant">
+<meta property="og:image" content="assets/Logo.jpg">
+<link rel="icon" href="assets/Logo.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FastFoodRestaurant","name":"Angels Homemade Burger","telephone":"+639512862056","priceRange":"₱","servesCuisine":"Burgers","image":"assets/Logo.jpg","address":{"@type":"PostalAddress","streetAddress":"P2 Bone South","addressLocality":"Aritao","addressRegion":"Nueva Vizcaya","postalCode":"3704","addressCountry":"PH"},"openingHours":"Mo-Su 09:00-21:00","sameAs":["https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr"]}</script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#120e0c;--bg2:#1c1612;--card:#251d17;--cream:#fbf1de;--mut:#c2b39d;--red:#d62828;--gold:#f6a823;--r:14px;--disp:'Bebas Neue',Impact,sans-serif;--sans:'DM Sans',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#120e0c;--bg2:#1c1612;--card:#251d17;--cream:#fbf1de;--mut:#c2b39d;--red:#d62828;--gold:#f6a823;--r:14px;--disp:'Poppins',system-ui,sans-serif;--sans:'Poppins',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth;scroll-padding-top:76px;background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--cream);font:400 1rem/1.6 var(--sans)}
@@ -58,14 +65,21 @@ nav{display:flex;align-items:center;justify-content:space-between;height:66px}
  .hero p{font-size:1rem;margin:14px 0 20px}
 }
 .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:32px}
-.filters{display:flex;flex-wrap:wrap;gap:10px}
-.chip{background:transparent;border:1.5px solid #52463a;color:var(--cream);padding:9px 20px;border-radius:999px;font:500 .9rem var(--sans);cursor:pointer;transition:.2s}
-.chip:hover{border-color:var(--gold)}
-.chip[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:#1a0f00;font-weight:700}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.category-tile{min-height:170px;padding:20px 14px;display:grid;place-items:center;gap:12px;background:linear-gradient(145deg,#39241a,#1c1612);border:1px solid #52463a;border-radius:var(--r);color:var(--cream);font:400 1.45rem var(--disp);cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
+.category-tile:hover,.category-tile:focus-visible{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 12px 28px rgba(0,0,0,.35)}
+.category-art{position:relative;width:130px;height:90px;overflow:hidden;border-radius:12px;background:radial-gradient(circle at 35% 30%,#8a321b,#30150f 72%)}
+.category-art img{width:100%;height:100%;object-fit:cover}
+.category-icon{position:absolute;right:5px;bottom:5px;width:38px;height:38px;display:grid;place-items:center;background:var(--cream);border:2px solid var(--gold);border-radius:50%;font-size:1.4rem}
+.category-view[hidden],.products-view[hidden],.mix-builder[hidden],.category-empty[hidden]{display:none}
+.products-head{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.back-categories{flex:0 0 auto;background:transparent;border:1px solid #6b5b4a;border-radius:999px;color:var(--cream);padding:10px 16px;font:500 .9rem var(--sans);cursor:pointer}
+.back-categories:hover{border-color:var(--gold);color:var(--gold)}
+.products-head h3{font-size:clamp(2rem,5vw,3rem)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
 .card{background:var(--card);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
 .card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(0,0,0,.5)}
-.card.hide,.mix-builder.hide{display:none}.card.pop{animation:pop .4s both}
+.card.hide{display:none}.card.pop{animation:pop .4s both}
 .mix-builder{margin-top:24px;padding:24px;background:var(--card);border:1px solid #52463a;border-radius:var(--r)}
 .mix-builder h3{font-size:2rem;color:var(--gold)}
 .mix-builder p{color:var(--mut);margin:8px 0 18px}
@@ -135,6 +149,38 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
 .fab.show{display:block}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* polish */
+h1,h2,h3,.logo,.logo b,.price,.tot,.tot b,.mix-price,.hl b{font-weight:800;letter-spacing:-.01em}
+.logo{font-size:clamp(.95rem,4.2vw,1.2rem)}
+.hero h1{font-size:clamp(2.5rem,8.5vw,5.2rem);line-height:1.02}
+h2{font-size:clamp(2rem,5vw,3.1rem)}
+.card h3{font-size:1.2rem;line-height:1.25}
+.price{font-size:1.5rem}
+.category-tile{font:700 1.05rem var(--disp)}
+.hero-art{border-radius:32px;border:3px solid var(--gold);box-shadow:0 0 0 9px rgba(246,168,35,.14),0 30px 60px rgba(0,0,0,.6);filter:none}
+.meta{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:18px}.meta .badge{margin:0}
+.open{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600}
+.open i{width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 4px rgba(74,222,128,.22)}
+.open.closed i{background:#f87171;box-shadow:0 0 0 4px rgba(248,113,113,.22)}
+.pic img{object-position:var(--op,50% 50%)}.pic img[src]{cursor:zoom-in}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:30px}
+.fcard{position:relative;background:var(--card);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.fcard:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(0,0,0,.5)}
+.fimg{aspect-ratio:4/5;overflow:hidden}.fimg img{width:100%;height:100%;object-fit:cover;object-position:var(--op,50% 50%);cursor:zoom-in;transition:transform .5s}
+.fcard:hover img{transform:scale(1.05)}
+.tag{position:absolute;top:12px;left:12px;z-index:2;background:var(--red);color:#fff;font-weight:800;font-size:.75rem;padding:4px 12px;border-radius:999px}
+.fcard .in h3{font-size:1.25rem}.fbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.steps{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.steps li{background:var(--card);border-radius:var(--r);padding:22px;border-top:3px solid var(--gold)}
+.steps b{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--red);margin-bottom:12px}
+.steps h3{font-size:1.15rem}.steps p{color:var(--mut);margin:6px 0 0}
+.lb{width:min(92vw,720px);max-width:none;padding:0;border:0;background:transparent;overflow:visible}
+.lb::backdrop{background:rgba(0,0,0,.88)}
+.lb img{width:100%;max-height:84vh;object-fit:contain;border-radius:var(--r)}
+.lb .dialog-close{position:absolute;top:-52px;right:0;background:rgba(0,0,0,.4)}
+.callfab{position:fixed;left:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;display:none}
+@media(max-width:780px){.callfab{display:block}}
 </style>
 </head>
 <body>
@@ -155,7 +201,7 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
 <main>
 <section class="hero" id="home"><div class="wrap">
  <div>
-  <span class="badge">100% Homemade · Made fresh daily</span>
+  <div class="meta"><span class="badge">100% Homemade · Made fresh daily</span><span class="open" id="openNow" role="status"><i></i><span></span></span></div>
   <h1>Homemade goodness <span>in every bite.</span></h1>
   <p>Sulit sa bawat kagat, sarap na babalik-balikan! Fresh homemade patties, burgers from just ₱40.</p>
   <div class="cta"><a class="btn red" href="#order" data-open-order>Pre-order Now</a><a class="btn ghost" href="#menu">See the Menu</a></div>
@@ -163,9 +209,17 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
  <img class="hero-art" src="assets/Logo.jpg" alt="Angels Homemade Burger logo featuring a burger with wings" width="1200" height="1200" fetchpriority="high">
 </div></section>
 
+<section class="alt" id="featured"><div class="wrap">
+ <h2>Now available</h2><p class="lead" style="margin-top:12px">Fresh additions to the Angels menu. Tap a photo to see it full size.</p>
+ <div class="feat">
+  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/hotdog-burger.jpg" alt="Overload Hotdog with Sili Con Carne, now available for 65 pesos" style="--op:50% 60%" loading="lazy"></div><div class="in"><h3>Overload Hotdog with Sili Con Carne</h3><p>Loaded hotdog topped with homestyle sili con carne and cheese.</p><div class="fbtns"><span class="price">₱65</span><button class="add" data-add="hotdog" aria-label="Add Overload Hotdog to order">+ Add</button></div></div></article>
+  <article class="fcard"><span class="tag">NEW</span><div class="fimg"><img src="assets/milktea.jpg" alt="Milky Matcha Latte, 12 oz 70 pesos, 16 oz 85 pesos" style="--op:50% 70%" loading="lazy"></div><div class="in"><h3>Milky Matcha Latte</h3><p>Creamy, cold matcha latte in two sizes.</p><div class="fbtns"><button class="add" data-add="matcha12" aria-label="Add Milky Matcha Latte 12 oz">+ 12oz ₱70</button><button class="add" data-add="matcha16" aria-label="Add Milky Matcha Latte 16 oz">+ 16oz ₱85</button></div></div></article>
+  <article class="fcard"><span class="tag">ADD-ON</span><div class="fimg"><img src="assets/chilicon.jpg" alt="Angels Homestyle Sili Con Carne add-on for 12 pesos" style="--op:50% 80%" loading="lazy"></div><div class="in"><h3>Homestyle Sili Con Carne</h3><p>Make any burger spicier and richer.</p><div class="fbtns"><span class="price">₱12</span><button class="add" data-add="sili" aria-label="Add Sili Con Carne to order">+ Add</button></div></div></article>
+ </div>
+</div></section>
+
 <section id="menu"><div class="wrap">
- <div class="head"><div><h2>The Menu</h2><p class="lead">Tap “Add” to build your pre-order.</p></div>
-  <div class="filters" role="group" aria-label="Filter menu"></div></div>
+ <div class="head"><div><h2>The Menu</h2><p class="lead">Choose a category to see what’s available.</p></div></div>
  <!--
  HOW TO EDIT THE MENU (no coding needed)
  - Photo: inside a card, find <img alt="..."> and add src="your-photo.jpg" -> <img src="your-photo.jpg" alt="...">
@@ -174,6 +228,9 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
  - New item: copy a whole <article> ... </article> block, paste it below the last one, and change data-id to a new unique word.
  - Categories: use Burger, Drinks, Combos, Special, Mix and Match or Add-ons in data-c and the cat label.
 -->
+ <div class="category-grid category-view" id="category-view" aria-label="Menu categories"></div>
+ <div class="products-view" id="products-view" hidden>
+  <div class="products-head"><button class="back-categories" id="back-categories" type="button">Menu</button><h3 id="category-title"></h3></div>
  <div class="grid" id="dishes">
   <article class="card" data-id="classic" data-n="Classic Burger" data-c="Burger" data-p="40">
    <div class="pic" data-e="🍔"><img alt="Classic Burger" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
@@ -210,10 +267,10 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
    <div class="in"><span class="cat">Combos</span><h3>Burger Egg, Cheese, Fries + Drink</h3><p>Our fullest meal: egg, cheese, fries and a drink.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="bfd" aria-label="Add Burger Egg, Cheese, Fries + Drink to order">+ Add</button></div></div>
   </article>
-  <article class="card" data-id="fr" data-n="Upgrade Burger: Regular" data-c="Add-ons" data-p="12">
-   <div class="pic" data-e="🍟"><img src="assets/chilicon.jpg" alt="Upgrade Burger: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
-   <div class="in"><span class="cat">Add-ons</span><h3>Upgrade Burger: Regular</h3><p>Upgrade your combo to chili Con Carne.</p>
-   <div class="row"><span class="price"></span><button class="add" data-add="fr" aria-label="Add Upgrade Burger: Regular to order">+ Add</button></div></div>
+  <article class="card" data-id="sili" data-n="Sili Con Carne Add-on" data-c="Add-ons" data-p="12">
+   <div class="pic" data-e="🌶️"><img src="assets/chilicon.jpg" alt="Sili Con Carne Add-on" style="--op:50% 80%" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Add-ons</span><h3>Sili Con Carne Add-on</h3><p>Angels homestyle sili con carne, added to your burger.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="sili" aria-label="Add Sili Con Carne Add-on to order">+ Add</button></div></div>
   </article>
   <article class="card" data-id="fries-regular" data-n="Upgrade Fries: Regular" data-c="Add-ons" data-p="20">
    <div class="pic" data-e="🍟"><img alt="Upgrade Fries: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
@@ -230,8 +287,23 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
    <div class="in"><span class="cat">Drinks</span><h3>Drinks</h3><p>Cold drink, sold separately.</p>
     <div class="row"><span class="price"></span><button class="add" data-add="dr" aria-label="Add Drinks to order">+ Add</button></div></div>
   </article>
+  <article class="card" data-id="hotdog" data-n="Overload Hotdog with Sili Con Carne" data-c="Special" data-p="65">
+   <div class="pic" data-e="🌭"><img src="assets/hotdog-burger.jpg" alt="Overload Hotdog with Sili Con Carne" style="--op:50% 60%" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Special</span><h3>Overload Hotdog with Sili Con Carne</h3><p>Loaded hotdog with homestyle sili con carne and cheese. Now available.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="hotdog" aria-label="Add Overload Hotdog with Sili Con Carne to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="matcha12" data-n="Milky Matcha Latte 12oz" data-c="Drinks" data-p="70">
+   <div class="pic" data-e="🍵"><img src="assets/milktea.jpg" alt="Milky Matcha Latte 12oz" style="--op:50% 70%" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Matcha Latte 12oz</h3><p>Creamy, cold matcha latte. Now available.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="matcha12" aria-label="Add Milky Matcha Latte 12oz to order">+ Add</button></div></div>
+  </article>
+  <article class="card" data-id="matcha16" data-n="Milky Matcha Latte 16oz" data-c="Drinks" data-p="85">
+   <div class="pic" data-e="🍵"><img src="assets/milktea.jpg" alt="Milky Matcha Latte 16oz" style="--op:50% 70%" loading="lazy" width="400" height="300"></div>
+   <div class="in"><span class="cat">Drinks</span><h3>Milky Matcha Latte 16oz</h3><p>The bigger cup of our milky matcha latte.</p>
+    <div class="row"><span class="price"></span><button class="add" data-add="matcha16" aria-label="Add Milky Matcha Latte 16oz to order">+ Add</button></div></div>
+  </article>
  </div>
- <div class="mix-builder hide" id="mix-builder" aria-labelledby="mix-title">
+ <div class="mix-builder" id="mix-builder" aria-labelledby="mix-title" hidden>
   <h3 id="mix-title">Mix &amp; Match</h3>
   <p>Choose one main and one side. Every combo is ₱99.</p>
   <div class="f2">
@@ -240,9 +312,11 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   </div>
   <div class="row"><button class="btn red" type="button" id="add-mix">Add combo to order</button><span class="mix-price">₱99</span></div>
  </div>
+ <p class="category-empty" id="category-empty" hidden>We’re preparing items for this category. Please check back soon.</p>
+ </div>
 </div></section>
 
-<section id="about"><div class="wrap two">
+<section class="alt" id="about"><div class="wrap two">
  <div class="rv"><h2>Made fresh. Made with care.</h2>
   <p class="lead" style="margin-top:14px">Angels Homemade Burger is a small local burger shop in Aritao. Every patty is made by hand, cooked fresh, and served with a smile. Simple ingredients, honest prices, and a burger worth coming back for.</p></div>
  <ul class="hl rv" style="margin:0">
@@ -250,6 +324,10 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   <li><b>Homemade patties</b><span>Made fresh daily, never an afterthought.</span></li>
   <li><b>Sulit &amp; satisfying</b><span>Filling burgers at prices that make sense.</span></li>
  </ul>
+</div></section>
+
+<section id="how"><div class="wrap"><h2>How to order</h2>
+ <ol class="steps"><li><b>1</b><h3>Pick your favorites</h3><p>Browse the menu and tap Add on anything you like.</p></li><li><b>2</b><h3>Send your pre-order</h3><p>Add your name and pickup time, then text or call us.</p></li><li><b>3</b><h3>Pick up fresh</h3><p>Your homemade patty is cooked fresh and ready when you arrive.</p></li></ol>
 </div></section>
 
 <section class="alt" id="contact"><div class="wrap two">
@@ -290,16 +368,43 @@ footer p{color:var(--mut);margin:8px 0 0;max-width:36ch}
   <p class="note">Opens your messaging app with the order filled in. Nothing is sent until you press send.</p>
  </form>
 </dialog>
+<a class="btn callfab" href="tel:+639512862056" aria-label="Call Angels Homemade Burger">📞 Call</a>
+<dialog class="lb" id="lb" aria-label="Photo viewer"><button class="dialog-close" type="button" aria-label="Close photo" data-close-lb>&times;</button><img alt=""></dialog>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const items=$$('.card').map(el=>({id:el.dataset.id,n:el.dataset.n,c:el.dataset.c,p:+el.dataset.p}));
 const peso=v=>'₱'+v;
+const ORDER_PHONE='+639512862056'; /* number that receives text orders */
 $$('.card').forEach(el=>$('.price',el).textContent=peso(+el.dataset.p));
-const fb=$('.filters'),grid=$('#dishes');
-const mixBuilder=$('#mix-builder');
-['All','Burger','Drinks','Combos','Special','Mix and Match','Add-ons'].forEach((c,k)=>{const b=document.createElement('button');b.className='chip';b.textContent=c;b.setAttribute('aria-pressed',k==0);b.onclick=()=>{$$('.chip',fb).forEach(x=>x.setAttribute('aria-pressed',x==b));$$('.card',grid).forEach(el=>{const s=c=='All'||el.dataset.c==c;el.classList.toggle('hide',!s);if(s){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}});mixBuilder.classList.toggle('hide',c!=='All'&&c!=='Mix and Match')};fb.append(b)});
+const grid=$('#dishes'),categoryView=$('#category-view'),productsView=$('#products-view'),mixBuilder=$('#mix-builder');
+const categories=[
+ {name:'Burger',slug:'burger',icon:'🍔',image:'assets/Logo.jpg'},
+ {name:'Drinks',slug:'drinks',icon:'🥤',image:'assets/milktea.jpg',pos:'50% 70%'},
+ {name:'Combos',slug:'combos',icon:'🍟',image:'assets/Logo.jpg'},
+ {name:'Special',slug:'special',icon:'⭐',image:'assets/hotdog-burger.jpg',pos:'50% 60%'},
+ {name:'Mix and Match',slug:'mix-and-match',icon:'🍔🥤',image:'assets/Logo.jpg'},
+ {name:'Add-ons',slug:'add-ons',icon:'➕',image:'assets/chilicon.jpg',pos:'50% 80%'}
+];
+categories.forEach(c=>{const b=document.createElement('button');b.type='button';b.className='category-tile';b.dataset.category=c.name;b.setAttribute('aria-label',`View ${c.name} menu`);b.innerHTML=`<span class="category-art" aria-hidden="true"><img src="${c.image}" alt="" style="object-position:${c.pos||'center'}"><span class="category-icon">${c.icon}</span></span><span>${c.name}</span>`;b.onclick=()=>{history.pushState(null,'',`#menu/${c.slug}`);showCategory(c);$('#menu').scrollIntoView()};categoryView.append(b)});
+function showCategory(category){
+ categoryView.hidden=true;productsView.hidden=false;$('#category-title').textContent=category.name;
+ let count=0;
+ $$('.card',grid).forEach(el=>{const match=el.dataset.c===category.name;el.classList.toggle('hide',!match);if(match){count++;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop')}});
+ mixBuilder.hidden=category.name!=='Mix and Match';
+ $('#category-empty').hidden=count>0||category.name==='Mix and Match';
+}
+function showCategories(){categoryView.hidden=false;productsView.hidden=true}
+function syncMenuRoute(){
+ const slug=location.hash.startsWith('#menu/')?location.hash.slice(6):'';
+ const category=categories.find(c=>c.slug===slug);
+ if(category)showCategory(category);else showCategories();
+}
+$('#back-categories').onclick=()=>{history.pushState(null,'','#menu');showCategories();$('#menu').scrollIntoView()};
+addEventListener('popstate',syncMenuRoute);
+addEventListener('hashchange',syncMenuRoute);
+syncMenuRoute();
 /* order */
 const cart={};
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),1600)};
@@ -322,12 +427,18 @@ function msg(){
  const ok=['nm','pk'].map(id=>{const el=$('#'+id),v=!!el.value.trim();el.setAttribute('aria-invalid',!v);el.nextElementSibling.textContent=v?'':'Required.';return v});
  if(!ok.every(Boolean)){$('#'+(ok[0]?'pk':'nm')).focus();return null}
  return `Hello Angels Homemade Burger! Pre-order:\n${rows.map(i=>`${cart[i.id]}x ${i.n} (${peso(i.p*cart[i.id])})`).join('\n')}\nTotal: ${peso(tot)}\nName: ${$('#nm').value.trim()}\nPickup: ${$('#pk').value.trim()}${$('#nt').value.trim()?'\nNotes: '+$('#nt').value.trim():''}`}
-$('#of').onsubmit=e=>{e.preventDefault();const m=msg();if(m)location.href='sms:+639551267925?body='+encodeURIComponent(m)};
+$('#of').onsubmit=e=>{e.preventDefault();const m=msg();if(m)location.href='sms:'+ORDER_PHONE+(/iPhone|iPad|iPod/i.test(navigator.userAgent)?'&':'?')+'body='+encodeURIComponent(m)};
 $('#cp').onclick=async()=>{const m=msg();if(!m)return;try{await navigator.clipboard.writeText(m);toast('Order copied. Paste it in Messenger.')}catch{toast('Copy failed. Use Text My Order.')}};
 /* SETTINGS: paste your Facebook page link between the quotes, e.g. 'https://facebook.com/yourpage' */
-const FB_URL='';
+const FB_URL='https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr';
 if(FB_URL)$('#fbl').innerHTML='<a class="btn ghost" href="'+FB_URL+'" target="_blank" rel="noopener">Follow us on Facebook</a>';
 render();
+/* open now (Philippine time, 9 AM - 9 PM) */
+function openState(){const p=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Manila',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date()),t=(+p.find(x=>x.type=='hour').value%24)+(+p.find(x=>x.type=='minute').value)/60,o=t>=9&&t<21,el=$('#openNow');el.classList.toggle('closed',!o);$('span',el).textContent=o?'Open now · until 9 PM':'Closed now · opens 9 AM';}
+openState();setInterval(openState,60000);
+/* photo viewer */
+const lb=$('#lb');
+document.addEventListener('click',e=>{const im=e.target.closest('.pic img[src],.fcard img');if(im){$('img',lb).src=im.src;$('img',lb).alt=im.alt;lb.showModal()}else if(e.target===lb||e.target.closest('[data-close-lb]'))lb.close()});
 /* nav + reveal */
 const hd=$('header'),bu=$('.burger'),ln=$('#links');
 addEventListener('scroll',()=>hd.classList.toggle('solid',scrollY>40),{passive:true});
