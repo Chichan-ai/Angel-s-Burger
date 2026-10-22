@@ -123,6 +123,8 @@ nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .empty{color:var(--mut);padding:8px 0}
 .tot{display:flex;justify-content:space-between;font:400 1.8rem var(--font)}
 .tot b{color:var(--gold);font-weight:400}
+.delivery-row{display:flex;justify-content:space-between;color:var(--mut)}
+.delivery-row[hidden]{display:none}
 label{font-weight:500;font-size:.9rem;display:block;margin-bottom:5px}
 input,select,textarea{background:#120e0c;border:1.5px solid #52463a;color:var(--cream);border-radius:10px;padding:12px 14px;font:inherit;width:100%}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:0}
@@ -337,7 +339,7 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 </div></section>
 
 <section id="how"><div class="wrap"><h2>How to order</h2>
- <ol class="steps"><li><b>1</b><h3>Pick your favorites</h3><p>Browse the menu and tap Add on anything you like.</p></li><li><b>2</b><h3>Send your pre-order</h3><p>Add your name and pickup time, then text or call us.</p></li><li><b>3</b><h3>Pick up fresh</h3><p>Your homemade patty is cooked fresh and ready when you arrive.</p></li></ol>
+ <ol class="steps"><li><b>1</b><h3>Pick your favorites</h3><p>Browse the menu and tap Add on anything you like.</p></li><li><b>2</b><h3>Send your pre-order</h3><p>Add your name, choose pickup or delivery, then text or call us.</p></li><li><b>3</b><h3>Pickup or delivery</h3><p>Choose pickup or have your fresh order delivered for a ₱50 fee.</p></li></ol>
 </div></section>
 
 <section class="alt" id="contact"><div class="wrap two">
@@ -345,12 +347,12 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
   <h2>Find us</h2>
   <ul class="info">
    <li><b>Address</b>P2 Bone South, Aritao, Nueva Vizcaya 3704, Philippines</li>
-   <li><b>Hours</b>9:00 AM - 9:00 PM</li>
-   <li><b>Email Us</b><a href="mailto:noelvibasdizonjr@gmail.com">noelvibasdizonjr@gmail.com</a></li>
-   <li><b>Call Us</b><a href="tel:+639512862056">0951 286 2056</a></li>
+   <li><b>Hours</b>10:00 AM - 9:00 PM</li>
+   <li><b>Email</b><a href="mailto:noelvibasdizonjr@gmail.com">noelvibasdizonjr@gmail.com</a></li>
+   <li><b>Phone</b><a href="tel:+639512862056">0951 286 2056</a></li>
    <li><b>Facebook</b><a href="https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr" target="_blank" rel="noopener">Angel's Homemade Burger</a></li>
   </ul>
-  <div class="cta"><a class="btn red" href="https://maps.app.goo.gl/hP7mNs8oBj9kKCU67?g_st=ic" target="_blank" rel="noopener">Get Directions</a><a class="btn ghost" href="tel:+639512862056">Call Now</a></div>
+  <div class="cta"><a class="btn red" href="https://maps.app.goo.gl/hP7mNs8oBj9kKCU67?g_st=ic" target="_blank" rel="noopener">Get Directions</a>
  </div>
  <div class="mapbox"><div><div class="pin"></div><h3 style="font-size:2rem">Aritao, Nueva Vizcaya</h3><p class="lead" style="margin:6px auto 16px">Open the exact pin in Google Maps.</p><a class="btn" href="https://maps.app.goo.gl/hP7mNs8oBj9kKCU67?g_st=ic" target="_blank" rel="noopener">Open in Google Maps</a></div></div>
 </div></section>
@@ -365,14 +367,18 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 </div></footer>
 <button class="btn red fab" id="fab" type="button" data-open-order>View order · <span id="fc">0</span></button>
 <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-title">
- <div class="dialog-head"><div><h2 id="order-title">Your order</h2><p class="note">Review your items and pickup details.</p></div><button class="dialog-close" type="button" aria-label="Close order" data-close-order>&times;</button></div>
+ <div class="dialog-head"><div><h2 id="order-title">Your order</h2><p class="note">Choose pickup or delivery and review your order.</p></div><button class="dialog-close" type="button" aria-label="Close order" data-close-order>&times;</button></div>
  <form class="order" id="of" novalidate>
   <ul class="lines" id="lines" aria-live="polite"></ul>
+  <div class="tot"><span>Items subtotal</span><b id="subtotal">₱0</b></div>
+  <div class="delivery-row" id="delivery-row" hidden><span>Delivery fee</span><b id="delivery-fee">₱50</b></div>
   <div class="tot"><span>Total</span><b id="tot">₱0</b></div>
+  <div><label for="fulfillment">Order method</label><select id="fulfillment"><option value="pickup">Pickup</option><option value="delivery">Delivery (+₱50)</option></select></div>
   <div class="f2">
    <div><label for="nm">Your name</label><input id="nm" autocomplete="name"><div class="err"></div></div>
-   <div><label for="pk">Pickup time</label><input id="pk" placeholder="e.g. 5:30 pm today"><div class="err"></div></div>
+   <div><label for="pk">Preferred time</label><input id="pk" placeholder="e.g. 5:30 pm today"><div class="err"></div></div>
   </div>
+  <div id="delivery-address-wrap" hidden><label for="delivery-address">Delivery address and landmark</label><textarea id="delivery-address" rows="2" autocomplete="street-address" placeholder="House number, street, barangay, and nearby landmark"></textarea><div class="err"></div></div>
   <div><label for="nt">Notes (optional)</label><textarea id="nt" rows="2" placeholder="No pickles, extra sauce, etc."></textarea></div>
   <div class="cta"><button class="btn red" type="submit">Text My Order</button><button class="btn ghost" type="button" id="cp">Copy Order</button><a class="btn ghost" href="tel:+639512862056">Call</a></div>
   <p class="note">Opens your messaging app with the order filled in. Nothing is sent until you press send.</p>
@@ -386,6 +392,7 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const items=$$('.card').map(el=>({id:el.dataset.id,n:el.dataset.n,c:el.dataset.c,p:+el.dataset.p}));
 const peso=v=>'₱'+v;
+const DELIVERY_FEE=50;
 const ORDER_PHONE='+639512862056'; /* number that receives text orders */
 $$('.card').forEach(el=>$('.price',el).textContent=peso(+el.dataset.p));
 const grid=$('#dishes'),categoryView=$('#category-view'),productsView=$('#products-view'),mixBuilder=$('#mix-builder');
@@ -421,9 +428,12 @@ const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clea
 function render(){
  const rows=items.filter(i=>cart[i.id]);
  $('#lines').innerHTML=rows.length?rows.map(i=>`<li><span class="nm">${i.n}<br><small style="color:var(--mut)">${peso(i.p)} each</small></span><span class="q"><button type="button" data-q="${i.id}:-1" aria-label="Remove one ${i.n}">−</button><b>${cart[i.id]}</b><button type="button" data-q="${i.id}:1" aria-label="Add one ${i.n}">+</button></span></li>`).join(''):'<li class="empty">Your order is empty. Add items from the menu.</li>';
- const tot=rows.reduce((s,i)=>s+i.p*cart[i.id],0),n=rows.reduce((s,i)=>s+cart[i.id],0);
- $('#tot').textContent=peso(tot);$('#fc').textContent=n;$('#fab').classList.toggle('show',n>0);
- return tot}
+ const subtotal=rows.reduce((s,i)=>s+i.p*cart[i.id],0),n=rows.reduce((s,i)=>s+cart[i.id],0),delivery=$('#fulfillment').value==='delivery',fee=delivery?DELIVERY_FEE:0;
+ $('#subtotal').textContent=peso(subtotal);$('#delivery-row').hidden=!delivery;$('#delivery-fee').textContent=peso(fee);$('#tot').textContent=peso(subtotal+fee);
+ $('#fc').textContent=n;$('#fab').classList.toggle('show',n>0);
+ return {subtotal,total:subtotal+fee,delivery}}
+function updateFulfillment(){const delivery=$('#fulfillment').value==='delivery',address=$('#delivery-address');$('#delivery-address-wrap').hidden=!delivery;$('#delivery-row').hidden=!delivery;if(!delivery){address.setAttribute('aria-invalid','false');address.nextElementSibling.textContent=''}render()}
+$('#fulfillment').addEventListener('change',updateFulfillment);
 document.addEventListener('click',e=>{
  const a=e.target.closest('[data-add]'),q=e.target.closest('[data-q]'),mix=e.target.closest('#add-mix');
  if(a){cart[a.dataset.add]=(cart[a.dataset.add]||0)+1;render();toast('Added to your order')}
@@ -432,11 +442,15 @@ document.addEventListener('click',e=>{
   cart[id]=(cart[id]||0)+1;render();toast('Mix & Match combo added')}
  if(q){const[id,d]=q.dataset.q.split(':');cart[id]=Math.max(0,(cart[id]||0)+ +d);render()}});
 function msg(){
- const tot=render(),rows=items.filter(i=>cart[i.id]);
+ const {subtotal,total,delivery}=render(),rows=items.filter(i=>cart[i.id]);
  if(!rows.length){toast('Add at least one item first');return null}
- const ok=['nm','pk'].map(id=>{const el=$('#'+id),v=!!el.value.trim();el.setAttribute('aria-invalid',!v);el.nextElementSibling.textContent=v?'':'Required.';return v});
- if(!ok.every(Boolean)){$('#'+(ok[0]?'pk':'nm')).focus();return null}
- return `Hello Angels Homemade Burger! Pre-order:\n${rows.map(i=>`${cart[i.id]}x ${i.n} (${peso(i.p*cart[i.id])})`).join('\n')}\nTotal: ${peso(tot)}\nName: ${$('#nm').value.trim()}\nPickup: ${$('#pk').value.trim()}${$('#nt').value.trim()?'\nNotes: '+$('#nt').value.trim():''}`}
+ const required=[$('#nm'),$('#pk'),...(delivery?[$('#delivery-address')]:[])];
+ const invalid=required.filter(el=>!el.value.trim());
+ required.forEach(el=>{const ok=!!el.value.trim();el.setAttribute('aria-invalid',!ok);el.nextElementSibling.textContent=ok?'':'Required.'});
+ if(invalid.length){invalid[0].focus();return null}
+ const address=delivery?`\nDelivery address: ${$('#delivery-address').value.trim()}`:'';
+ const feeLine=delivery?`\nDelivery fee: ${peso(DELIVERY_FEE)}`:'';
+ return `Hello Angels Homemade Burger! Pre-order:\n${rows.map(i=>`${cart[i.id]}x ${i.n} (${peso(i.p*cart[i.id])})`).join('\n')}\nItems subtotal: ${peso(subtotal)}${feeLine}\nTotal: ${peso(total)}\nName: ${$('#nm').value.trim()}\nOrder method: ${delivery?'Delivery':'Pickup'}\nPreferred time: ${$('#pk').value.trim()}${address}${$('#nt').value.trim()?'\nNotes: '+$('#nt').value.trim():''}`}
 $('#of').onsubmit=e=>{e.preventDefault();const m=msg();if(m)location.href='sms:'+ORDER_PHONE+(/iPhone|iPad|iPod/i.test(navigator.userAgent)?'&':'?')+'body='+encodeURIComponent(m)};
 $('#cp').onclick=async()=>{const m=msg();if(!m)return;try{await navigator.clipboard.writeText(m);toast('Order copied. Paste it in Messenger.')}catch{toast('Copy failed. Use Text My Order.')}};
 /* SETTINGS: paste your Facebook page link between the quotes, e.g. 'https://facebook.com/yourpage' */
