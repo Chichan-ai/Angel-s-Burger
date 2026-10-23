@@ -14,8 +14,11 @@
     FB_URL: 'https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr',
     TIKTOK_URL: '',
     INSTAGRAM_URL: '',
-    MAX_LEN: Object.freeze({ name: 60, time: 40, address: 200, notes: 200 })
+    MAX_LEN: Object.freeze({ name: 60, time: 40, address: 200, notes: 200 }),
+    MAX_SMS_LENGTH: 1600                   // ≈10 SMS segments
   });
+
+  const CART_STORAGE_KEY = 'angels-hb-cart-v1';
 
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -50,6 +53,17 @@
 
   /* CSS custom properties set through the CSSOM (allowed by a strict CSP). */
   $$('[data-op]').forEach(node => node.style.setProperty('--op', node.dataset.op));
+
+  /* If an asset is missing, hide the img so the emoji fallback shows cleanly. */
+  $$('.pic img, .fimg img').forEach(img => {
+    if (!img.getAttribute('src')) return;
+    const handleError = () => {
+      if (img.closest('.fimg')) img.style.display = 'none';
+      else img.removeAttribute('src');
+    };
+    if (img.complete && img.naturalWidth === 0) handleError();
+    else img.addEventListener('error', handleError, { once: true });
+  });
 
   /* ------------------------------------------------------------------
      Catalog (single source of truth for prices used by the cart)
@@ -122,6 +136,27 @@
   });
 
   friesItems.forEach(registerItem);
+
+  /* Featured-card fallback: keeps Add buttons alive if a menu card is removed. */
+  $$('.fcard [data-add]').forEach(btn => {
+    const id = btn.dataset.add;
+    if (!id || itemsById.has(id)) return;
+    const card = btn.closest('.fcard');
+    const title = card?.querySelector('h3')?.textContent?.trim() || '';
+    if (!title) return;
+
+    const fbtns = btn.closest('.fbtns');
+    const priceEl = fbtns?.querySelector('.price');
+    let price = Number(btn.dataset.price);
+    if (!price && priceEl) price = Number((priceEl.textContent || '').replace(/[^\d]/g, ''));
+    if (!price) {
+      const match = btn.textContent.match(/₱\s*(\d+)/);
+      if (match) price = Number(match[1]);
+    }
+    if (!Number.isInteger(price) || price <= 0) return;
+
+    registerItem({ id, n: title, c: 'Special', p: price });
+  });
 
   /* ------------------------------------------------------------------
      Categories / menu routing
@@ -230,6 +265,54 @@
     return item;
   }
 
+  /* ---------- Persistence (sessionStorage, fully validated) ---------- */
+  function saveCart() {
+    const custom = {};
+    for (const [id, qty] of Object.entries(cart)) {
+      const item = itemsById.get(id);
+      if (item && item.c === 'Mix and Match') {
+        custom[id] = { n: item.n, c: item.c, p: item.p };
+      }
+    }
+    try {
+      sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify({ cart, custom }));
+    } catch { /* storage disabled or quota exceeded */ }
+  }
+
+  (function restoreCart() {
+    let raw;
+    try { raw = sessionStorage.getItem(CART_STORAGE_KEY); } catch { return; }
+    if (!raw) return;
+
+    let data;
+    try { data = JSON.parse(raw); } catch { return; }
+    if (!data || typeof data !== 'object') return;
+
+    if (data.custom && typeof data.custom === 'object') {
+      for (const [id, item] of Object.entries(data.custom)) {
+        if (typeof id !== 'string' || id.length > 64) continue;
+        if (!item || typeof item !== 'object') continue;
+        const n = String(item.n || '').slice(0, 200);
+        const c = String(item.c || '').slice(0, 40);
+        const p = Number(item.p);
+        if (!n || !Number.isInteger(p) || p <= 0) continue;
+        if (!itemsById.has(id)) {
+          itemsById.set(id, Object.freeze({ id, n, c, p }));
+        }
+      }
+    }
+
+    if (data.cart && typeof data.cart === 'object') {
+      for (const [id, qty] of Object.entries(data.cart)) {
+        if (typeof id !== 'string' || id.length > 64) continue;
+        if (!itemsById.has(id)) continue;
+        const n = Number(qty);
+        if (!Number.isInteger(n) || n < 1 || n > CONFIG.MAX_QTY_PER_ITEM) continue;
+        cart[id] = n;
+      }
+    }
+  })();
+
   function render() {
     const rows = [...itemsById.values()].filter(i => cart[i.id]);
     const lines = $('#lines');
@@ -278,9 +361,20 @@
     $('#tot').textContent = delivery
       ? `${peso(subtotal + min)}–${peso(subtotal + max)}`
       : peso(subtotal);
-    $('#fc').textContent = n;
-    $('#fab').classList.toggle('show', n > 0);
 
+    /* FAB pulse on count change */
+    const fcEl = $('#fc');
+    const fabEl = $('#fab');
+    const prev = Number(fcEl.textContent);
+    fcEl.textContent = n;
+    fabEl.classList.toggle('show', n > 0);
+    if (n !== prev && n > 0) {
+      fabEl.classList.remove('pulse');
+      void fabEl.offsetWidth;
+      fabEl.classList.add('pulse');
+    }
+
+    saveCart();
     return { subtotal, total: subtotal, delivery, rows };
   }
 
@@ -307,7 +401,6 @@
 
     if (addBtn) {
       let id = addBtn.dataset.add;
-      let label = '';
       if (id === 'fries-regular' || id === 'fl') {
         const picked = addBtn.closest('.fbtns, .row')?.querySelector('.fries-flavor')?.value;
         const flavor = FRIES_FLAVORS.includes(picked) ? picked : 'regular';   // whitelist
@@ -317,6 +410,9 @@
       if (item) {
         render();
         toast(`Added ${item.n}`);
+        addBtn.classList.add('just-added');
+        clearTimeout(addBtn._flashTimer);
+        addBtn._flashTimer = setTimeout(() => addBtn.classList.remove('just-added'), 700);
       }
     }
 
@@ -402,22 +498,58 @@
       ? `Estimated total: ${peso(subtotal + min)}–${peso(subtotal + max)} (final fee and total to be confirmed by the shop)`
       : `Total: ${peso(total)}`;
 
-    return `Hello Angels Homemade Burger! Pre-order:\n${lines}\n` +
-           `Items subtotal: ${peso(subtotal)}${feeLine}\n${totalLine}\n` +
-           `Name: ${v.name}\nOrder method: ${delivery ? 'Delivery' : 'Pickup'}\n` +
-           `Preferred time: ${v.time}` +
-           `${delivery ? `\nDelivery address: ${v.address}` : ''}` +
-           `${v.notes ? `\nNotes: ${v.notes}` : ''}`;
+    const message =
+      `Hello Angels Homemade Burger! Pre-order:\n${lines}\n` +
+      `Items subtotal: ${peso(subtotal)}${feeLine}\n${totalLine}\n` +
+      `Name: ${v.name}\nOrder method: ${delivery ? 'Delivery' : 'Pickup'}\n` +
+      `Preferred time: ${v.time}` +
+      `${delivery ? `\nDelivery address: ${v.address}` : ''}` +
+      `${v.notes ? `\nNotes: ${v.notes}` : ''}`;
+
+    if (message.length > CONFIG.MAX_SMS_LENGTH) {
+      toast('Order is too long for one SMS. Please split it.');
+      return null;
+    }
+    return message;
   }
 
+  let submitting = false;
   $('#of').addEventListener('submit', e => {
     e.preventDefault();
+    if (submitting) return;
+    submitting = true;
+    const submitBtn = e.target.querySelector('[type="submit"]');
+    submitBtn.setAttribute('aria-busy', 'true');
+
+    try {
+      const m = buildMessage();
+      if (!m) return;
+      const isApple =
+        /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+      location.href = `sms:${CONFIG.ORDER_PHONE}${isApple ? '&' : '?'}body=${encodeURIComponent(m)}`;
+    } finally {
+      setTimeout(() => {
+        submitting = false;
+        submitBtn.removeAttribute('aria-busy');
+      }, 1500);
+    }
+  });
+
+  /* Show "Copy order" on devices unlikely to handle sms:. */
+  const canSMS = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  const copyBtn = $('#copy-order');
+  if (copyBtn && !canSMS) copyBtn.hidden = false;
+
+  copyBtn?.addEventListener('click', async () => {
     const m = buildMessage();
     if (!m) return;
-    const isApple =
-      /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-      (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
-    location.href = `sms:${CONFIG.ORDER_PHONE}${isApple ? '&' : '?'}body=${encodeURIComponent(m)}`;
+    try {
+      await navigator.clipboard.writeText(m);
+      toast('Order copied — paste it into a text to 0951 286 2056');
+    } catch {
+      toast('Could not copy. Long-press the message to select it.');
+    }
   });
 
   /* ------------------------------------------------------------------
@@ -554,38 +686,77 @@
     ln.classList.remove('open');
     bu.setAttribute('aria-expanded', 'false');
     bu.setAttribute('aria-label', 'Open menu');
+    document.body.classList.remove('menu-open');
   };
 
   bu.addEventListener('click', () => {
     const o = ln.classList.toggle('open');
     bu.setAttribute('aria-expanded', String(o));
     bu.setAttribute('aria-label', o ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('menu-open', o);
   });
 
   $$('a', ln).forEach(a => a.addEventListener('click', closeMenu));
 
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && ln.classList.contains('open')) closeMenu();
+  });
+
+  document.addEventListener('click', e => {
+    if (!ln.classList.contains('open')) return;
+    if (ln.contains(e.target) || bu.contains(e.target)) return;
+    closeMenu();
+  });
+
   const od = $('#order-dialog');
 
-  $$('[data-open-order]').forEach(node =>
-    node.addEventListener('click', e => {
-      e.preventDefault();
-      if (!od.open) od.showModal();
-    }));
+  $$('[data-open-order]').forEach(node => node.addEventListener('click', e => {
+    e.preventDefault();
+    if (od.open) return;
+    od.showModal();
+    setTimeout(() => $('#nm')?.focus(), 60);
+  }));
 
   $('[data-close-order]').addEventListener('click', () => od.close());
 
   $('#cancel-order').addEventListener('click', () => {
+    const totalQty = Object.values(cart).reduce((s, q) => s + q, 0);
+    if (totalQty > 0 && !confirm('Clear your entire order?')) return;
     Object.keys(cart).forEach(id => delete cart[id]);
     $('#of').reset();
-    $$('#of [aria-invalid]').forEach(field => field.removeAttribute('aria-invalid'));
-    $$('#of .err').forEach(error => { error.textContent = ''; });
+    $$('#of [aria-invalid]').forEach(f => f.removeAttribute('aria-invalid'));
+    $$('#of .err').forEach(err => { err.textContent = ''; });
     updateFulfillment();
     od.close();
-    toast('Order cancelled and cart cleared');
+    toast('Order cleared');
   });
 
   od.addEventListener('click', e => { if (e.target === od) od.close(); });
 
+  /* ---------- Active nav highlighting ---------- */
+  const navLinks = new Map();
+  ['home', 'menu', 'about', 'contact'].forEach(id => {
+    const link = document.querySelector(`.links a[href="#${id}"]`);
+    const section = document.getElementById(id);
+    if (link && section) navLinks.set(section, link);
+  });
+
+  if (navLinks.size) {
+    const navIO = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        navLinks.forEach((link, section) => {
+          const active = section === en.target;
+          link.classList.toggle('is-active', active);
+          if (active) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    navLinks.forEach((_, section) => navIO.observe(section));
+  }
+
+  /* ---------- Reveal on scroll ---------- */
   const io = new IntersectionObserver(entries =>
     entries.forEach(en => {
       if (en.isIntersecting) {

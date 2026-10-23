@@ -6,14 +6,30 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#120e0c">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+
   <title>Angels Homemade Burger | Aritao, Nueva Vizcaya</title>
   <meta name="description" content="Angels Homemade Burger in Aritao, Nueva Vizcaya. Fresh homemade patties from ₱40. Pre-order by call or text: 0951 286 2056.">
-  <meta name="theme-color" content="#120e0c">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Angels Homemade Burger | Aritao, Nueva Vizcaya">
   <meta property="og:description" content="Fresh homemade burgers from ₱40. Pre-order by text or call: 0951 286 2056.">
-  <meta property="og:type" content="restaurant">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Angels Homemade Burger">
   <meta property="og:image" content="assets/Logo.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Angels Homemade Burger">
+  <meta name="twitter:description" content="Fresh homemade burgers from ₱40. Pre-order by text or call: 0951 286 2056.">
+  <meta name="twitter:image" content="assets/Logo.jpg">
+
   <link rel="icon" href="assets/Logo.jpg">
+  <link rel="apple-touch-icon" href="assets/Logo.jpg">
 
   <script type="application/ld+json">
   {
@@ -21,7 +37,7 @@
     "@type": "FastFoodRestaurant",
     "name": "Angels Homemade Burger",
     "telephone": "+639512862056",
-    "priceRange": "₱",
+    "priceRange": "₱₱",
     "servesCuisine": "Burgers",
     "image": "assets/Logo.jpg",
     "address": {
@@ -33,14 +49,19 @@
       "addressCountry": "PH"
     },
     "openingHours": "Mo-Su 10:00-20:00",
+    "currenciesAccepted": "PHP",
     "sameAs": ["https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr"]
   }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+  <a class="skip" href="#main">Skip to main content</a>
 
   <noscript>
     <p class="note wrap">The menu and pre-order form need JavaScript. You can still call or text us at 0951 286 2056.</p>
@@ -60,13 +81,13 @@
           <li><a href="#menu">Menu</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Find Us</a></li>
-          <li><a class="btn" href="#order" data-open-order>Pre-order</a></li>
+          <li><a class="btn" href="tel:+639512862056" data-open-order>Pre-order</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
 
     <section class="hero" id="home">
       <div class="wrap">
@@ -78,7 +99,7 @@
           <h1>Homemade goodness <span>in every bite.</span></h1>
           <p>Sulit sa bawat kagat, sarap na babalik-balikan! Fresh homemade patties, burgers from just ₱40.</p>
           <div class="cta">
-            <a class="btn red" href="#order" data-open-order>Pre-order Now</a>
+            <a class="btn red" href="tel:+639512862056" data-open-order>Pre-order Now</a>
             <a class="btn ghost" href="#menu">See the Menu</a>
           </div>
         </div>
@@ -185,7 +206,7 @@
         <div class="head">
           <div>
             <h2>Our Menu</h2>
-            <p class="lead">Choose a category to see what’s available.</p>
+            <p class="lead">Choose a category to see what's available.</p>
           </div>
         </div>
 
@@ -330,7 +351,7 @@
 
             <article class="card" data-id="fries-regular" data-n="Crispy Fries: Regular" data-c="Add-ons" data-p="20">
               <div class="pic" data-e="🍟">
-                <img src="assets/fries_small.jpg" alt="Upgrade Fries: Regular" loading="lazy" width="400" height="300">
+                <img src="assets/fries_small.jpg" alt="Crispy Fries: Regular" loading="lazy" width="400" height="300">
                 <!-- PHOTO: add src="your-photo.jpg" inside the img tag above -->
               </div>
               <div class="in">
@@ -679,7 +700,7 @@
             </div>
           </div>
 
-          <p class="category-empty" id="category-empty" hidden>We’re preparing items for this category. Please check back soon.</p>
+          <p class="category-empty" id="category-empty" hidden>We're preparing items for this category. Please check back soon.</p>
 
         </div><!-- /#products-view -->
       </div>
@@ -801,20 +822,20 @@
       <div class="f2">
         <div>
           <label for="nm">Your name</label>
-          <input id="nm" name="name" autocomplete="name" maxlength="60">
-          <div class="err"></div>
+          <input id="nm" name="name" autocomplete="name" maxlength="60" aria-describedby="err-nm" enterkeyhint="next">
+          <div class="err" id="err-nm"></div>
         </div>
         <div>
           <label for="pk">Preferred time</label>
-          <input id="pk" name="time" maxlength="40" autocomplete="off" placeholder="e.g. 5:30 pm today">
-          <div class="err"></div>
+          <input id="pk" name="time" maxlength="40" autocomplete="off" placeholder="e.g. 5:30 pm today" aria-describedby="err-pk" enterkeyhint="next">
+          <div class="err" id="err-pk"></div>
         </div>
       </div>
 
       <div id="delivery-address-wrap" hidden>
         <label for="delivery-address">Delivery address and landmark</label>
-        <textarea id="delivery-address" name="address" rows="2" maxlength="200" autocomplete="street-address" placeholder="House number, street, barangay, and nearby landmark"></textarea>
-        <div class="err"></div>
+        <textarea id="delivery-address" name="address" rows="2" maxlength="200" autocomplete="street-address" placeholder="House number, street, barangay, and nearby landmark" aria-describedby="err-address"></textarea>
+        <div class="err" id="err-address"></div>
       </div>
 
       <div>
@@ -824,10 +845,11 @@
 
       <div class="cta">
         <button class="btn red" type="submit">Text My Order</button>
+        <button class="btn ghost" type="button" id="copy-order" hidden>Copy order</button>
         <a class="btn ghost" href="tel:+639512862056">Call</a>
       </div>
       <div class="order-cancel">
-        <button class="btn ghost" type="button" id="cancel-order">Cancel</button>
+        <button class="btn ghost" type="button" id="cancel-order">Clear order</button>
       </div>
       <p class="note">Opens your messaging app with the order filled in. Nothing is sent until you press send.</p>
     </form>
