@@ -18,6 +18,8 @@ section{padding:80px 0}
 .btn.red:hover{background:#ec3a3a}
 .btn.ghost{background:transparent;color:var(--cream);border-color:var(--cream)}
 .btn.ghost:hover{background:var(--cream);color:#1a0f00}
+.btn.fb{background:#1877f2;border-color:#1877f2;color:#fff}
+.btn.fb:hover{background:#0f5dc1}
 header{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .3s}
 header.solid{background:rgba(18,14,12,.96);box-shadow:0 2px 18px rgba(0,0,0,.6)}
 nav{display:flex;align-items:center;justify-content:space-between;height:66px}
@@ -136,6 +138,17 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:0}
 .info{display:grid;gap:16px;margin:22px 0;padding:0;list-style:none}
 .info b{display:block;color:var(--gold)}
 .info a{text-underline-offset:3px}
+.socials{margin-top:14px}
+.social-title{margin:0 0 8px;color:var(--mut)}
+.social-links{display:flex;gap:10px}
+.social-link{display:grid;width:42px;height:42px;place-items:center;border-radius:50%;color:#fff;transition:transform .2s,opacity .2s}
+.social-link:hover{transform:translateY(-3px)}
+.social-link svg{width:22px;height:22px;fill:currentColor}
+.social-facebook{background:#1877f2}
+.social-tiktok{background:#090909}
+.social-instagram{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)}
+.social-link.is-unset{opacity:.45;cursor:not-allowed}
+.social-link.is-unset:hover{transform:none}
 .mapbox{border-radius:var(--r);min-height:300px;background:repeating-linear-gradient(0deg,transparent 0 39px,#2c241d 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,#2c241d 39px 40px),#19130f;display:grid;place-items:center;text-align:center;padding:24px}
 .pin{width:44px;height:44px;margin:0 auto 10px;background:var(--red);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center}
 .pin::after{content:"";width:16px;height:16px;background:var(--cream);border-radius:50%}

@@ -12,6 +12,8 @@ const CONFIG = Object.freeze({
   OPEN_HOUR: 10,                         // 10 AM (Philippine time)
   CLOSE_HOUR: 20,                        // 8 PM
   FB_URL: 'https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr',
+  TIKTOK_URL: '',
+  INSTAGRAM_URL: '',
   MAX_LEN: Object.freeze({ name: 60, time: 40, address: 200, notes: 200 })
 });
 
@@ -292,15 +294,59 @@ $('#of').addEventListener('submit', e => {
 });
 
 /* ------------------------------------------------------------------
-   Facebook link (URL validated before it is used)
+   Social links (profile URLs are validated before use)
 ------------------------------------------------------------------ */
-(() => {
+const socialIcon = (name) => {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+
+  if (name === 'Facebook') {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.6V13h2.7v8h3.2z');
+    svg.append(path);
+  } else if (name === 'Instagram') {
+    const frame = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    frame.setAttribute('x', '3'); frame.setAttribute('y', '3');
+    frame.setAttribute('width', '18'); frame.setAttribute('height', '18');
+    frame.setAttribute('rx', '5');
+    const lens = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    lens.setAttribute('cx', '12'); lens.setAttribute('cy', '12'); lens.setAttribute('r', '4');
+    const flash = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    flash.setAttribute('cx', '17.5'); flash.setAttribute('cy', '6.5'); flash.setAttribute('r', '1');
+    [frame, lens, flash].forEach(shape => {
+      shape.setAttribute('fill', 'none');
+      shape.setAttribute('stroke', 'currentColor');
+      shape.setAttribute('stroke-width', '2');
+      svg.append(shape);
+    });
+  } else {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M19.6 6.7a4.8 4.8 0 0 1-3.2-4.5h-3.5v13.2a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9a7 7 0 1 0 5.5 6.8V9.1a8.3 8.3 0 0 0 4.8 1.5V7.1a4.8 4.8 0 0 1-1.6-.4z');
+    svg.append(path);
+  }
+  return svg;
+};
+
+[
+  { name: 'Facebook', url: CONFIG.FB_URL, host: /(^|\.)facebook\.com$/ },
+  { name: 'TikTok', url: CONFIG.TIKTOK_URL, host: /(^|\.)tiktok\.com$/ },
+  { name: 'Instagram', url: CONFIG.INSTAGRAM_URL, host: /(^|\.)instagram\.com$/ }
+].forEach(({ name, url, host }) => {
+  let href = '';
   try {
-    const u = new URL(CONFIG.FB_URL);
-    if (u.protocol !== 'https:' || !/(^|\.)facebook\.com$/.test(u.hostname)) return;
-    $('#fbl').append(el('a', { class: 'btn ghost', href: u.href, target: '_blank', rel: 'noopener noreferrer', text: 'Follow us on Facebook' }));
-  } catch { /* ignore bad URL */ }
-})();
+    const parsed = new URL(url);
+    if (parsed.protocol === 'https:' && host.test(parsed.hostname)) href = parsed.href;
+  } catch { /* URL is not configured yet. */ }
+
+  const link = el(href ? 'a' : 'span', {
+    class: `social-link social-${name.toLowerCase()}${href ? '' : ' is-unset'}`,
+    ...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {}),
+    'aria-label': href ? `Follow us on ${name}` : `${name} profile link not configured`
+  }, socialIcon(name));
+  $('#social-links').append(link);
+});
 render();
 
 /* ------------------------------------------------------------------
