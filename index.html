@@ -189,7 +189,11 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
  .fcard{flex:0 0 min(82vw,360px);scroll-snap-align:start;scroll-snap-stop:always}
 }
 .tag{position:absolute;top:12px;left:12px;z-index:2;background:var(--red);color:#fff;font-weight:800;font-size:.75rem;padding:4px 12px;border-radius:999px}
-.fcard .in h3{font-size:1.25rem}.fbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.fcard .in h3{font-size:1.25rem}.feat .in p{flex:1}.fbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:auto;padding-top:10px;align-items:stretch}
+.feat .fbtns .add{width:100%;min-height:42px;padding:8px 10px;display:flex;align-items:center;justify-content:center;text-align:center}
+.feat .fbtns .price{align-self:center;font-size:1.4rem}
+.feat .fbtns .fries-option{grid-column:1/-1;margin:0}
+.feat .fbtns .fries-flavor{flex:1;min-width:0}
 .steps{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
 .steps li{background:var(--card);border-radius:var(--r);padding:22px;border-top:3px solid var(--gold)}
 .steps b{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--red);margin-bottom:12px}
@@ -240,7 +244,7 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 </div></section>
 
 <section id="menu"><div class="wrap">
-  <div class="head"><div><h2>The Menu</h2><p class="lead">Choose a category to see what’s available.</p></div></div>
+  <div class="head"><div><h2>Our Menu</h2><p class="lead">Choose a category to see what’s available.</p></div></div>
   <!--
   HOW TO EDIT THE MENU (no coding needed)
   - Photo: inside a card, find <img alt="..."> and add src="your-photo.jpg" -> <img src="your-photo.jpg" alt="...">
@@ -300,13 +304,13 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
     <article class="card" data-id="fries-regular" data-n="Crispy Fries: Regular" data-c="Add-ons" data-p="20">
     <div class="pic" data-e="🍟"><img src="assets/fries_small.jpg" alt="Upgrade Fries: Regular" loading="lazy" width="400" height="300"><!-- PHOTO: add src="your-photo.jpg" inside the img tag above --></div>
     <div class="in"><span class="cat">Add-ons</span><h3>Crispy Fries: Regular</h3><p>Regular crispy fries. Choose your favorite flavor.</p>
-      <div class="row fries-row"><div class="fries-option"><label class="fries-choice" for="regular-fries-flavor">Flavor</label><select id="regular-fries-flavor" class="fries-flavor" aria-label="Choose regular Crispy Fries flavor"><option value="BBQ">BBQ</option><option value="Sour Cream">Sour Cream</option><option value="Cheese">Cheese</option></select></div><span class="price"></span><button class="add" data-add="fries-regular" aria-label="Add regular Crispy Fries to order">+ Add</button></div></div>
+      <div class="row fries-row"><div class="fries-option"><label class="fries-choice" for="regular-fries-flavor">Flavor</label><select id="regular-fries-flavor" class="fries-flavor" aria-label="Choose regular Crispy Fries flavor"><option value="regular">Regular</option><option value="BBQ">BBQ</option><option value="Sour Cream">Sour Cream</option><option value="Cheese">Cheese</option></select></div><span class="price"></span><button class="add" data-add="fries-regular" aria-label="Add regular Crispy Fries to order">+ Add</button></div></div>
     </article>
 
     <article class="card" data-id="fl" data-n="Crispy Fries: Large" data-c="Add-ons" data-p="50">
     <div class="pic" data-e="🍟"><img src="assets/fries_large.jpg" alt="Crispy Fries" loading="lazy" width="400" height="300"></div>
     <div class="in"><span class="cat">Add-ons</span><h3>Crispy Fries: Large</h3><p>Large crispy fries. Choose your favorite flavor.</p>
-      <div class="row fries-row"><div class="fries-option"><label class="fries-choice" for="large-fries-flavor">Flavor</label><select id="large-fries-flavor" class="fries-flavor" aria-label="Choose large Crispy Fries flavor"><option value="BBQ">BBQ</option><option value="Sour Cream">Sour Cream</option><option value="Cheese">Cheese</option></select></div><span class="price"></span><button class="add" data-add="fl" aria-label="Add large Crispy Fries to order">+ Add</button></div></div>
+      <div class="row fries-row"><div class="fries-option"><label class="fries-choice" for="large-fries-flavor">Flavor</label><select id="large-fries-flavor" class="fries-flavor" aria-label="Choose large Crispy Fries flavor"><option value="regular">Regular</option><option value="BBQ">BBQ</option><option value="Sour Cream">Sour Cream</option><option value="Cheese">Cheese</option></select></div><span class="price"></span><button class="add" data-add="fl" aria-label="Add large Crispy Fries to order">+ Add</button></div></div>
     </article>
 
     <article class="card" data-id="americano" data-n="Americano" data-c="Drinks" data-p="65">
@@ -377,7 +381,7 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 
     <article class="card" data-id="matcha" data-n="Milky Matcha Latte" data-c="Drinks">
       <div class="pic" data-e="🍵"><img src="assets/milky_matcha_strawberry.jpg" alt="Milky Matcha Latte" style="--op:50% 70%" loading="lazy" width="400" height="300"></div>
-      <div class="in"><span class="cat">Drinks</span><h3>Milky Matcha strawberry</h3><p>Creamy, cold matcha latte. Choose a size:</p>
+      <div class="in"><span class="cat">Drinks</span><h3>Milky Matcha strawberry</h3><p>Creamy, cold matcha strawberry. Choose a size:</p>
         <div class="fbtns"><button class="add" data-add="matcha-12" data-order-name="Milky Matcha Latte 12 oz" data-price="85" aria-label="Add 12 oz Milky Matcha Latte to order">12 oz · ₱85</button>
           <button class="add" data-add="matcha-16" data-order-name="Milky Matcha Latte 16 oz" data-price="100" aria-label="Add 16 oz Milky Matcha Latte to order">16 oz · ₱100</button>
         </div>
@@ -465,7 +469,7 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
 </section>
 
 <section id="how"><div class="wrap"><h2>How to order</h2>
- <ol class="steps"><li><b>1</b><h3>Pick your favorites</h3><p>Browse the menu and tap Add on anything you like.</p></li><li><b>2</b><h3>Send your pre-order</h3><p>Add your name, choose pickup or delivery, then text or call us.</p></li><li><b>3</b><h3>Pickup or delivery</h3><p>Choose pickup or have your fresh order delivered for a ₱50 fee.</p></li></ol>
+ <ol class="steps"><li><b>1</b><h3>Pick your favorites</h3><p>Browse the menu and tap Add on anything you like.</p></li><li><b>2</b><h3>Send your pre-order</h3><p>Add your name, choose pickup or delivery, then text or call us.</p></li><li><b>3</b><h3>Pickup or delivery</h3><p>Delivery is ₱30–₱150 depending on your location and distance.</p></li></ol>
 </div></section>
 
 <section class="alt" id="contact"><div class="wrap two">
@@ -497,9 +501,10 @@ h2{font-size:clamp(2rem,5vw,3.1rem)}
  <form class="order" id="of" novalidate>
   <ul class="lines" id="lines" aria-live="polite"></ul>
   <div class="tot"><span>Items subtotal</span><b id="subtotal">₱0</b></div>
-  <div class="delivery-row" id="delivery-row" hidden><span>Delivery fee</span><b id="delivery-fee">₱50</b></div>
-  <div class="tot"><span>Total</span><b id="tot">₱0</b></div>
-  <div><label for="fulfillment">Order method</label><select id="fulfillment"><option value="pickup">Pickup</option><option value="delivery">Delivery (+₱50)</option></select></div>
+  <div class="delivery-row" id="delivery-row" hidden><span>Delivery fee</span><b id="delivery-fee">₱30–₱150</b></div>
+  <p class="note" id="delivery-note" hidden>Delivery fee depends on your location and distance. The shop will confirm the final fee and total.</p>
+  <div class="tot"><span id="total-label">Total</span><b id="tot">₱0</b></div>
+  <div><label for="fulfillment">Order method</label><select id="fulfillment"><option value="pickup">Pickup</option><option value="delivery">Delivery (₱30–₱150)</option></select></div>
   <div class="f2">
    <div><label for="nm">Your name</label><input id="nm" autocomplete="name"><div class="err"></div></div>
    <div><label for="pk">Preferred time</label><input id="pk" placeholder="e.g. 5:30 pm today"><div class="err"></div></div>
@@ -531,7 +536,7 @@ const items=[...new Map($$('.card').flatMap(el=>{
 }).concat(friesFlavorItems).map(item=>[item.id,item])).values()];
 const slugify = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const peso=v=>'₱'+v;
-const DELIVERY_FEE=50;
+const DELIVERY_FEE_MIN=30,DELIVERY_FEE_MAX=150;
 const ORDER_PHONE='+639512862056'; /* number that receives text orders */
 $$('.card').forEach(el=>{const price=$('.price',el);if(price)price.textContent=peso(+el.dataset.p)});
 const grid=$('#dishes'),categoryView=$('#category-view'),productsView=$('#products-view'),mixBuilder=$('#mix-builder');
@@ -568,10 +573,13 @@ const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clea
 function render(){
  const rows=items.filter(i=>cart[i.id]);
  $('#lines').innerHTML=rows.length?rows.map(i=>`<li><span class="nm">${i.n}<br><small style="color:var(--mut)">${peso(i.p)} each</small></span><span class="q"><button type="button" data-q="${i.id}:-1" aria-label="Remove one ${i.n}">−</button><b>${cart[i.id]}</b><button type="button" data-q="${i.id}:1" aria-label="Add one ${i.n}">+</button></span></li>`).join(''):'<li class="empty">Your order is empty. Add items from the menu.</li>';
- const subtotal=rows.reduce((s,i)=>s+i.p*cart[i.id],0),n=rows.reduce((s,i)=>s+cart[i.id],0),delivery=$('#fulfillment').value==='delivery',fee=delivery?DELIVERY_FEE:0;
- $('#subtotal').textContent=peso(subtotal);$('#delivery-row').hidden=!delivery;$('#delivery-fee').textContent=peso(fee);$('#tot').textContent=peso(subtotal+fee);
+ const subtotal=rows.reduce((s,i)=>s+i.p*cart[i.id],0),n=rows.reduce((s,i)=>s+cart[i.id],0),delivery=$('#fulfillment').value==='delivery';
+ $('#subtotal').textContent=peso(subtotal);$('#delivery-row').hidden=!delivery;$('#delivery-note').hidden=!delivery;
+ $('#delivery-fee').textContent=delivery?`${peso(DELIVERY_FEE_MIN)}–${peso(DELIVERY_FEE_MAX)}`:'';
+ $('#total-label').textContent=delivery?'Estimated total':'Total';
+ $('#tot').textContent=delivery?`${peso(subtotal+DELIVERY_FEE_MIN)}–${peso(subtotal+DELIVERY_FEE_MAX)}`:peso(subtotal);
  $('#fc').textContent=n;$('#fab').classList.toggle('show',n>0);
- return {subtotal,total:subtotal+fee,delivery}}
+ return {subtotal,total:subtotal,delivery}}
 function updateFulfillment(){const delivery=$('#fulfillment').value==='delivery',address=$('#delivery-address');$('#delivery-address-wrap').hidden=!delivery;$('#delivery-row').hidden=!delivery;if(!delivery){address.setAttribute('aria-invalid','false');address.nextElementSibling.textContent=''}render()}
 $('#fulfillment').addEventListener('change',updateFulfillment);
 document.addEventListener('click',e=>{
@@ -594,8 +602,9 @@ function msg(){
  required.forEach(el=>{const ok=!!el.value.trim();el.setAttribute('aria-invalid',!ok);el.nextElementSibling.textContent=ok?'':'Required.'});
  if(invalid.length){invalid[0].focus();return null}
  const address=delivery?`\nDelivery address: ${$('#delivery-address').value.trim()}`:'';
- const feeLine=delivery?`\nDelivery fee: ${peso(DELIVERY_FEE)}`:'';
- return `Hello Angels Homemade Burger! Pre-order:\n${rows.map(i=>`${cart[i.id]}x ${i.n} (${peso(i.p*cart[i.id])})`).join('\n')}\nItems subtotal: ${peso(subtotal)}${feeLine}\nTotal: ${peso(total)}\nName: ${$('#nm').value.trim()}\nOrder method: ${delivery?'Delivery':'Pickup'}\nPreferred time: ${$('#pk').value.trim()}${address}${$('#nt').value.trim()?'\nNotes: '+$('#nt').value.trim():''}`}
+ const feeLine=delivery?`\nDelivery fee: ${peso(DELIVERY_FEE_MIN)}–${peso(DELIVERY_FEE_MAX)} (depends on location and distance)`:'';
+ const totalLine=delivery?`Estimated total: ${peso(subtotal+DELIVERY_FEE_MIN)}–${peso(subtotal+DELIVERY_FEE_MAX)} (final fee and total to be confirmed by the shop)`:`Total: ${peso(total)}`;
+ return `Hello Angels Homemade Burger! Pre-order:\n${rows.map(i=>`${cart[i.id]}x ${i.n} (${peso(i.p*cart[i.id])})`).join('\n')}\nItems subtotal: ${peso(subtotal)}${feeLine}\n${totalLine}\nName: ${$('#nm').value.trim()}\nOrder method: ${delivery?'Delivery':'Pickup'}\nPreferred time: ${$('#pk').value.trim()}${address}${$('#nt').value.trim()?'\nNotes: '+$('#nt').value.trim():''}`}
 $('#of').onsubmit=e=>{e.preventDefault();const m=msg();if(m)location.href='sms:'+ORDER_PHONE+(/iPhone|iPad|iPod/i.test(navigator.userAgent)?'&':'?')+'body='+encodeURIComponent(m)};
 /* SETTINGS: paste your Facebook page link between the quotes, e.g. 'https://facebook.com/yourpage' */
 const FB_URL='https://www.facebook.com/share/1HFL8ad2Cn/?mibextid=wwXIfr';
