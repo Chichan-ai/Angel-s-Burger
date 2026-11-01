@@ -168,12 +168,12 @@
 
   /* Stock photos: Unsplash; drink photo by ROMAN ODINTSOV via Pexels. */
   const categories = [
-    { name: 'Burger',        slug: 'burger',        image: 'assets/category-burgers.jpg' },
-    { name: 'Drinks',        slug: 'drinks',        image: 'assets/category-drinks.jpg' },
-    { name: 'Combos',        slug: 'combos',        image: 'assets/category-combos.jpg' },
-    { name: 'Special',       slug: 'special',       image: 'assets/category-special.jpg' },
-    { name: 'Mix and Match', slug: 'mix-and-match', image: 'assets/category-mix-match.jpg' },
-    { name: 'Add-ons',       slug: 'add-ons',       image: 'assets/category-add-ons.jpg' }
+    { name: 'Burger',        slug: 'burger',        image: 'assets/category-burgers.jpg', description: 'Freshly made burgers stacked with homemade flavor.' },
+    { name: 'Drinks',        slug: 'drinks',        image: 'assets/category-drinks.jpg', description: 'Cool, creamy, and refreshing sips for every craving.' },
+    { name: 'Combos',        slug: 'combos',        image: 'assets/category-combos.jpg', description: 'Make it a meal with a burger and your favorite sides.' },
+    { name: 'Special',       slug: 'special',       image: 'assets/category-special.jpg', description: 'Discover our pizzas, loaded favorites, and special treats.' },
+    { name: 'Mix and Match', slug: 'mix-and-match', image: 'assets/category-mix-match.jpg', description: 'Build a combo with a main and a side you love.' },
+    { name: 'Add-ons',       slug: 'add-ons',       image: 'assets/category-add-ons.jpg', description: 'Add a little something extra to complete your meal.' }
   ];
 
   categories.forEach(c => {
@@ -181,12 +181,13 @@
       {
         type: 'button',
         class: 'category-tile',
-        'aria-label': `View ${c.name} menu`,
+        'aria-label': `View ${c.name} menu: ${c.description}`,
         data: { category: c.name }
       },
       el('span', { class: 'category-art', 'aria-hidden': 'true' },
         el('img', { src: c.image, alt: '' })),
-      el('span', { text: c.name })
+      el('span', { class: 'category-name', text: c.name }),
+      el('span', { class: 'category-description', text: c.description })
     );
 
     tile.addEventListener('click', () => {

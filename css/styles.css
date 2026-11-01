@@ -445,7 +445,7 @@ nav {
   padding: 20px 14px;
   display: grid;
   place-items: center;
-  gap: 12px;
+  gap: 8px;
   background: linear-gradient(145deg, #39241a, #1c1612);
   border: 1px solid #52463a;
   border-radius: var(--r);
@@ -453,6 +453,18 @@ nav {
   font: 700 1.05rem var(--font);
   cursor: pointer;
   transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+
+.category-name {
+  align-self: end;
+}
+
+.category-description {
+  align-self: start;
+  color: var(--mut);
+  font-size: .78rem;
+  font-weight: 400;
+  line-height: 1.45;
 }
 
 .category-tile:hover,
@@ -580,11 +592,6 @@ nav {
   gap: 16px;
 }
 
-.mix-price {
-  font: 400 2rem var(--font);
-  color: var(--gold);
-}
-
 @keyframes pop {
   from {
     opacity: 0;
@@ -666,6 +673,18 @@ nav {
 .price {
   font: 400 2rem var(--font);
   color: var(--gold);
+}
+
+.fcard .price,
+.mix-price {
+  font-size: 1.2rem;
+}
+
+.featured-price {
+  flex: 0 0 auto !important;
+  margin: 6px 0 0 !important;
+  color: var(--gold) !important;
+  font-weight: 700;
 }
 
 .add {
@@ -1215,7 +1234,6 @@ h3,
 .price,
 .tot,
 .tot b,
-.mix-price,
 .hl b {
   font-weight: 800;
   letter-spacing: -.01em;
